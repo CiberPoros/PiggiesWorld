@@ -1,0 +1,17 @@
+﻿@{
+    Layout = null;
+}
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="~/">Piggies World</a>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div>
+                @RenderPage("~/PartialPages/_navigationMenu.cshtml")
+            </div>
+            <div class="ml-auto">
+                @RenderPage("~/PartialPages/_authMenu.cshtml")
+            </div>
+        </div>
+    </nav>
+</header>

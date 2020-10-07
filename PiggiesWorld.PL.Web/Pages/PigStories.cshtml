@@ -1,0 +1,60 @@
+﻿@{
+    Layout = "/Layouts/_externalLayout.cshtml";
+
+    int storyCount = Request["storyCount"] == null ? 20 : int.Parse(Request["storyCount"]);
+
+    Page.StoryCount = storyCount;
+}
+
+<div class="container center-block text-center">
+
+    <div class="d-flex justify-content-around">
+        @RenderPage("~/PartialPages/_story.cshtml")
+    </div>
+
+    @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+    {
+        <button type="button" class="btn-secondary" data-toggle="modal" data-target="#addStoryModal">Добавить пиго-историю</button>
+
+        <div class="modal fade" id="addStoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Заполните поля</h4>
+                    </div>
+                    <form action="~/Pages/UploadStory.cshtml" enctype="multipart/form-data" method="post">
+                        <div class="modal-body">
+                            <input type="text" name="story_title" placeholder="введите заголовок*" size="48" value="" required />
+                            <div style="height:30px">
+                                <label for="preview_photo" class="btn-link">загрузите фото для заголовка*</label>
+                                <input id="preview_photo" type="file" name="preview_photo" style="visibility:hidden" value="" required />
+                            </div>
+                            <textarea class="non-resize" name="story_description" placeholder="описание истории*" rows="5" cols="50" maxlength="200"></textarea>
+                            <textarea class="non-resize" name="story_body" placeholder="тело истории*" rows="20" cols="50" maxlength="200"></textarea>
+                            <input type="text" name="story_header1" placeholder="введите подзаголовок (не обязательно)" size="48" value="" />
+                            <div style="height:30px">
+                                <label for="inner_photo1" class="btn-link">добавьте фото (не обязательно)</label>
+                                <input id="inner_photo1" type="file" name="inner_photo1" style="visibility:hidden" value="" />
+                            </div>
+                            <textarea class="non-resize" name="inner_text1" placeholder="дополнительная информация (не обязательно)" rows="20" cols="50" maxlength="500"></textarea>
+                            <input type="text" name="story_header2" placeholder="введите еще подзаголовок (не обязательно)" size="48" value="" />
+                            <div style="height:30px">
+                                <label for="inner_photo2" class="btn-link">добавьте еще фото (не обязательно)</label>
+                                <input id="inner_photo2" type="file" name="inner_photo2" style="visibility:hidden" value="" />
+                            </div>
+                            <textarea class="non-resize" name="inner_text2" placeholder="добавьте дополнительную информацию (не обязательно)" rows="20" cols="50" maxlength="500"></textarea>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                            <input type="submit" class="btn btn-primary" name="add_history" value="Добавить пиго-историю" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+
+    <script src="~/Scripts/jquery-3.0.0.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</div>
+

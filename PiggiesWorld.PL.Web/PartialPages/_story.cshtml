@@ -1,0 +1,25 @@
+﻿@using PiggiesWorld.BLL.Contracts;
+@using PiggiesWorld.Common.Entities;
+@using PiggiesWorld.PL.Web.Models;
+@using Ninject;
+
+@{
+    Layout = null;
+    var storiesManager = DependencesResolver.Resolver.Get<IStoriesManager>();
+
+    var storyCount = (int)Page.StoryCount;
+}
+
+<div class="stories-container">
+    <div class="row">
+        @foreach (var item in storiesManager.GetStoriesWithUploaders(storyCount))
+        {
+            <div class="m-md-3">
+                <h3>@item.story.Title</h3>
+                <a href="~/Pages/FullPigStory.cshtml?story_id=@(item.story.ID)"><img src="~/Images/Photo/@(item.story.PreviewPhotoName)" alt="@(item.story.Description)" width="300" /></a>
+                <h6>Автор: @(item.uploaderName)</h6>
+                <p>@item.story.Description</p>
+            </div>
+        }
+    </div>
+</div>

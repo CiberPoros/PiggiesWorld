@@ -1,0 +1,23 @@
+﻿@using PiggiesWorld.PL.Web.Models;
+@using PiggiesWorld.Common.Entities;
+@using PiggiesWorld.BLL.Contracts;
+@using Ninject; 
+
+@{
+    Layout = null;
+
+    if (!User.IsInRole("admin") && !User.IsInRole("moderator"))
+    {
+        Response.Redirect("~/Pages/Photo.cshtml");
+    }
+
+    if (IsPost)
+    {
+        var photoId = int.Parse(Request["photoID"]);
+        var photoManager = DependencesResolver.Resolver.Get<IPhotoManager>();
+
+        photoManager.DeletePhotoById(photoId);
+    }
+
+    Response.Redirect("~/Pages/Photo.cshtml");
+}

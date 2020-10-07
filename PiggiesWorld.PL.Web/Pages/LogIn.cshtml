@@ -1,0 +1,33 @@
+﻿@using PiggiesWorld.PL.Web.Models;
+@using Ninject;
+@using PiggiesWorld.BLL.Contracts;
+
+@{
+    Layout = "/Layouts/_externalLayout.cshtml";
+
+    var authManager = DependencesResolver.Resolver.Get<IAuthManager>();
+
+    if (IsPost)
+    {
+        var login = Request["login"];
+        var password = Request["password"];
+
+        if (authManager.IsCorrectPassword(login, password))
+        {
+            FormsAuthentication.SetAuthCookie(login, createPersistentCookie: true);
+        }
+
+        Response.Redirect("~");
+    }
+}
+
+<link href="~/Content/auth.css" rel="stylesheet" />
+<div class="box">
+    <form action="~/Pages/LogIn.cshtml" method="post">
+        <h1>Вход</h1>
+        <input type="text" placeholder="Имя пользователя" name="login" required>
+        <input type="password" placeholder="Пароль" name="password" required>
+        <input type="submit" value="Войти" name="sign-in">
+    </form>
+</div>
+

@@ -1,0 +1,48 @@
+﻿@using PiggiesWorld.Common.Entities;
+@using PiggiesWorld.BLL.Contracts;
+@using PiggiesWorld.PL.Web.Models; 
+@using Ninject; 
+
+@{
+    Layout = null;
+
+    if (!User.IsInRole("admin") && !User.IsInRole("moderator"))
+    {
+        Response.Redirect("~/Pages/PigStories.cshtml");
+    }
+
+    if (IsPost)
+    {
+        var path = Server.MapPath("~/Images/Photo");
+
+        var previewPhotoName = Normalize(Request.Files["preview_photo"].FileName);
+        var photoName1 = Normalize(Request.Files["inner_photo1"].FileName);
+        var photoName2 = Normalize(Request.Files["inner_photo2"].FileName);
+
+        Story story = new Story
+        {
+            Title = Normalize(Request["story_title"]),
+            PreviewPhotoName = previewPhotoName == null ? null : $"{path}\\{previewPhotoName}",
+            Description = Normalize(Request["story_description"]),
+            Body = Normalize(Request["story_body"]),
+            Header1 = Normalize(Request["story_header1"]),
+            PhotoName1 = photoName1 == null ? null : $"{path}\\{photoName1}",
+            Information1 = Normalize(Request["inner_text1"]),
+            Header2 = Normalize(Request["story_header1"]),
+            PhotoName2 = photoName2 == null ? null : $"{path}\\{photoName2}",
+            Information2 = Normalize(Request["inner_text2"])
+        };
+
+        var usersManager = DependencesResolver.Resolver.Get<IUsersManager>();
+        var storiesManager = DependencesResolver.Resolver.Get<IStoriesManager>();
+
+        story.UserID = usersManager.GetUserByLogin(User.Identity.Name).ID;
+
+        storiesManager.AddStory(Request.Files["preview_photo"].InputStream, Request.Files["inner_photo1"].InputStream, Request.Files["inner_photo2"].InputStream, story);
+
+        string Normalize(string str) => str.Trim() == string.Empty ? null : str.Trim();
+    }
+
+    Response.Redirect("~/Pages/PigStories.cshtml");
+}
+

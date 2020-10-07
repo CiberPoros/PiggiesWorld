@@ -1,0 +1,43 @@
+﻿@{
+    Layout = "/Layouts/_externalLayout.cshtml";
+
+    int photoCount = Request["photoCount"] == null ? 20 : int.Parse(Request["photoCount"]);
+
+    Page.PhotoCount = photoCount;
+}
+
+<div class="container">
+    @RenderPage("~/PartialPages/_photo.cshtml")
+    <div class="center-block text-center">
+        <a class="btn-secondary" href="~/Pages/Photo.cshtml?photoCount=@(photoCount + 20)">Показать еще</a>
+        @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+        {
+            <button type="button" class="btn-secondary" data-toggle="modal" data-target="#addPhotoModal">Добавить фото</button>
+
+            <div class="modal fade" id="addPhotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel">Выберите фото</h4>
+                        </div>
+                        <form action="~/Pages/UploadPhoto.cshtml" enctype="multipart/form-data" method="post">
+                            <div class="modal-body">
+                                <input type="file" name="pig_photo" value="" required />
+                                <input type="text" name="photo_description" value="" required />
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                                <input type="submit" class="btn btn-primary" name="load_file" value="Загрузить" />
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<script src="~/Scripts/jquery-3.0.0.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+@*<script src="~/Scripts/jquery.fancybox.js"></script>*@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous"></script>

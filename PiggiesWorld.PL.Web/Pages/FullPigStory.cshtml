@@ -1,0 +1,55 @@
+﻿@using Ninject;
+@using PiggiesWorld.PL.Web.Models;
+@using PiggiesWorld.Common.Entities;
+@using PiggiesWorld.BLL.Contracts; 
+
+@{
+    Layout = "/Layouts/_externalLayout.cshtml";
+
+    if (Request["story_id"] is null)
+    {
+        Response.Redirect("~/Pages/PigStories.cshtml");
+    }
+
+    int storyID = int.Parse(Request["story_id"]);
+
+    var storiesManager = DependencesResolver.Resolver.Get<IStoriesManager>();
+
+    var story = storiesManager.GetStoryById(storyID);
+}
+
+<div class="container center-block text-center">
+    <div class="full-story-container d-flex justify-content-center">
+        <div class="card story-card" style="width: 600px">
+            <img class="card-img-top img-fluid" src="~/Images/Photo/@(story.PreviewPhotoName)" alt="@(story.Description)" />
+            <div class="card-body">
+                <h2 class="card-title">@story.Title</h2>
+                <p class="card-text">@story.Body</p>
+                @if (!(story.Header1 is null))
+                {
+                    <h4 class="card-title">@story.Header1</h4>
+                }
+                @if (!(story.PhotoName1 is null))
+                {
+                    <img class="card-img img-fluid" src="~/Images/Photo/@(story.PhotoName1)" />
+                }
+                @if (!(story.Information1 is null))
+                {
+                    <p class="card-text">@story.Information1</p>
+                }
+                @if (!(story.Header2 is null))
+                {
+                    <h5 class="card-title">@story.Header2</h5>
+                }
+                @if (!(story.PhotoName2 is null))
+                {
+                    <img class="card-img img-fluid" src="~/Images/Photo/@(story.PhotoName2)" />
+                }
+                @if (!(story.Information2 is null))
+                {
+                    <p class="card-text">@story.Information2</p>
+                }
+            </div>
+        </div>
+    </div>
+</div>

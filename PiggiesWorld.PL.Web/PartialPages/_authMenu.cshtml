@@ -1,0 +1,17 @@
+﻿@{
+    Layout = null;
+}
+
+<div>
+    <ul class="nav navbar-nav navbar-right">
+        @if (!User.Identity.IsAuthenticated)
+        {
+            <li class="nav-item"><a class="nav-link text-dark" href="~/Pages/LogIn.cshtml">Войти</a></li>
+            <li class="nav-item"><a class="nav-link text-dark" href="~/Pages/Registration.cshtml">Регистрация</a></li>
+        }
+        else
+        {
+            <li class="nav-item"><a class="nav-link text-dark" href="~/Pages/LogOut.cshtml">Выйти</a></li>
+        }
+    </ul>
+</div>

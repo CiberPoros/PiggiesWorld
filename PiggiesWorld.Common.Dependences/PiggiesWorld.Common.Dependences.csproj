@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{61467BA8-15CC-473B-8F44-FC8BC1B61DE8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PiggiesWorld.Common.Dependences</RootNamespace>
+    <AssemblyName>PiggiesWorld.Common.Dependences</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="NinjectRegistrationsBLL.cs" />
+    <Compile Include="NinjectRegistrationsDAL.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PiggiesWorld.BLL.Contracts\PiggiesWorld.BLL.Contracts.csproj">
+      <Project>{adb8d9c9-e352-42e6-ba5e-941348cb84fb}</Project>
+      <Name>PiggiesWorld.BLL.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PiggiesWorld.BLL.Logic\PiggiesWorld.BLL.Logic.csproj">
+      <Project>{333ae25f-caf1-42ce-93f8-4d5f039fa620}</Project>
+      <Name>PiggiesWorld.BLL.Logic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PiggiesWorld.DAL.Contracts\PiggiesWorld.DAL.Contracts.csproj">
+      <Project>{e68ccd47-a98a-495e-9630-f23f11fdb159}</Project>
+      <Name>PiggiesWorld.DAL.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PiggiesWorld.DAL.HardDrive\PiggiesWorld.DAL.HardDrive.csproj">
+      <Project>{8D3DF114-9596-4C8B-B728-F86EFC73BE2D}</Project>
+      <Name>PiggiesWorld.DAL.HardDrive</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PiggiesWorld.DAL.Sql\PiggiesWorld.DAL.Sql.csproj">
+      <Project>{fe755c07-00e5-4867-8529-1ff42027b4e9}</Project>
+      <Name>PiggiesWorld.DAL.Sql</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

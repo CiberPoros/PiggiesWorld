@@ -1,0 +1,11 @@
+﻿body {
+    background: url('../Images/piggs_background.jpg') no-repeat center center fixed;
+}
+
+.non-resize {
+    resize: none;
+}
+
+.main-content {
+    overflow-y: scroll;
+}

@@ -1,0 +1,30 @@
+﻿@using PiggiesWorld.PL.Web.Models;
+@using PiggiesWorld.Common.Entities;
+@using PiggiesWorld.BLL.Contracts;
+@using Ninject;
+
+@{
+    Layout = null;
+
+    if (!User.IsInRole("admin") && !User.IsInRole("moderator"))
+    {
+        Response.Redirect("~/Pages/Photo.cshtml");
+    }
+
+    if (IsPost)
+    {
+        var file = Request.Files["pig_photo"];
+        var description = Request["photo_description"];
+
+        var stream = file.InputStream;
+
+        var path = Server.MapPath("~/Images/Photo");
+
+        var photoManager = DependencesResolver.Resolver.Get<IPhotoManager>();
+        var usersManager = DependencesResolver.Resolver.Get<IUsersManager>();
+
+        photoManager.AddPhoto(stream, $"{path}\\{Path.GetFileName(file.FileName)}", description, usersManager.GetUserByLogin(User.Identity.Name));
+    }
+
+    Response.Redirect("~/Pages/Photo.cshtml");
+}

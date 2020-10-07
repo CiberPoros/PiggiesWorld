@@ -1,0 +1,30 @@
+﻿@using PiggiesWorld.BLL.Contracts;
+@using PiggiesWorld.Common.Entities;
+@using PiggiesWorld.PL.Web.Models;
+@using Ninject;
+
+@{
+    Layout = null;
+    IPhotoManager photoManager = DependencesResolver.Resolver.Get<IPhotoManager>();
+
+    var photoCount = (int)Page.PhotoCount;
+}
+
+<div class="photos-container">
+    <div class="row">
+        @foreach (var item in photoManager.GetPhotoWithUploaders(photoCount))
+        {
+            <div class="col-md-3 col-sm-4 col-xs-6 thumb" title="@item.photo.Description">
+                <a data-fancybox="gallery" href="~/Images/Photo/@(item.photo.Path)" data-caption="Автор: @item.uploaderName">
+                    <img class="img-responsive" src="~/Images/Photo/@(item.photo.Path)" alt="@item.photo.Description" width="260">
+                </a>
+                @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+                {
+                    <form action="~/Pages/DeletePhoto.cshtml?photoID=@(item.photo.ID)" method="post">
+                        <input type="submit" class="align-self-center" name="delete" value="delete" />
+                    </form>
+                }
+            </div>
+        }
+    </div>
+</div>
