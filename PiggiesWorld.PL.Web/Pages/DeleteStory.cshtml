@@ -1,0 +1,24 @@
+﻿@using PiggiesWorld.PL.Web.Models;
+@using PiggiesWorld.Common.Entities;
+@using PiggiesWorld.BLL.Contracts;
+@using Ninject;
+
+@{
+    Layout = null;
+
+    if (!User.IsInRole("admin") && !User.IsInRole("moderator"))
+    {
+        Response.Redirect("~/Pages/PigStories.cshtml");
+    }
+
+    if (IsPost)
+    {
+        var storyId = int.Parse(Request["storyId"]);
+        var storiesManager = DependencesResolver.Resolver.Get<IStoriesManager>();
+
+        storiesManager.DeleteStoryById(storyId);
+    }
+
+    Response.Redirect("~/Pages/PigStories.cshtml");
+}
+

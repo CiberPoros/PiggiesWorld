@@ -19,6 +19,7 @@ namespace PiggiesWorld.Common.Dependences
             Bind<IRolesDao>().To<RolesDao>().InSingletonScope();
             Bind<IImageDao>().To<ImageDao>().InSingletonScope();
             Bind<IStoriesDao>().To<StoriesDao>().InSingletonScope();
+            Bind<IVideoDao>().To<VideoDao>().InSingletonScope();
         }
     }
 }

@@ -10,8 +10,8 @@ namespace PiggiesWorld.Common.Entities
     public class Video : IEntityWithId
     {
         public int ID { get; set; }
-        public string Path { get; set; }
-        public User Uploader { get; set; }
+        public string Url { get; set; }
+        public int UserID { get; set; }
         public string Description { get; set; }
         public DateTime UploadDate { get; set; }
     }

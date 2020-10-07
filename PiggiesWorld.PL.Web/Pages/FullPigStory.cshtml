@@ -20,18 +20,18 @@
 
 <div class="container center-block text-center">
     <div class="full-story-container d-flex justify-content-center">
-        <div class="card story-card" style="width: 600px">
-            <img class="card-img-top img-fluid" src="~/Images/Photo/@(story.PreviewPhotoName)" alt="@(story.Description)" />
+        <div class="card story-card p-md-2" style="width: 500px; background: rgba(245, 245, 245, 0.8);">
+            <img class="mx-auto d-block img-thumbnail" src="~/Images/Photo/@(story.PreviewPhotoName)" alt="@(story.Description)" />
             <div class="card-body">
                 <h2 class="card-title">@story.Title</h2>
-                <p class="card-text">@story.Body</p>
+                <p class="card-text" align="left" style="white-space: pre-wrap;">@story.Body</p>
                 @if (!(story.Header1 is null))
                 {
                     <h4 class="card-title">@story.Header1</h4>
                 }
                 @if (!(story.PhotoName1 is null))
                 {
-                    <img class="card-img img-fluid" src="~/Images/Photo/@(story.PhotoName1)" />
+                    <img class="mx-auto d-block img-thumbnail mb-2" src="~/Images/Photo/@(story.PhotoName1)" />
                 }
                 @if (!(story.Information1 is null))
                 {
@@ -43,7 +43,7 @@
                 }
                 @if (!(story.PhotoName2 is null))
                 {
-                    <img class="card-img img-fluid" src="~/Images/Photo/@(story.PhotoName2)" />
+                    <img class="mx-auto d-block img-thumbnail mb-2" src="~/Images/Photo/@(story.PhotoName2)" />
                 }
                 @if (!(story.Information2 is null))
                 {

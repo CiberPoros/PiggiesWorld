@@ -1,0 +1,27 @@
+﻿@using PiggiesWorld.PL.Web.Models;
+@using PiggiesWorld.Common.Entities;
+@using PiggiesWorld.BLL.Contracts;
+@using Ninject;
+
+@{
+    Layout = null;
+
+    if (!User.IsInRole("admin") && !User.IsInRole("moderator"))
+    {
+        Response.Redirect("~/Pages/Video.cshtml");
+    }
+
+    if (IsPost)
+    {
+        var url = Request["video_link"];
+        var description = Request["video_description"];
+
+        var usersManager = DependencesResolver.Resolver.Get<IUsersManager>();
+        var videoManager = DependencesResolver.Resolver.Get<IVideoManager>();
+
+        videoManager.AddVideo(new Video { Url = url, Description = description, UserID = usersManager.GetUserByLogin(User.Identity.Name).ID, UploadDate = DateTime.Now});
+
+    }
+
+    Response.Redirect("~/Pages/Video.cshtml");
+}

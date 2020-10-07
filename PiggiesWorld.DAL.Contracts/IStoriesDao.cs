@@ -10,5 +10,7 @@ namespace PiggiesWorld.DAL.Contracts
         IEnumerable<(Story story, string uploaderName)> GetStoriesWithUploaders(int count);
 
         Story GetStoryById(int id);
+
+        void DeleteStoryById(int id);
     }
 }

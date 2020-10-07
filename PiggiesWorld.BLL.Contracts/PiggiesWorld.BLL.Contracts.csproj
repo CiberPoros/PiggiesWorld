@@ -45,6 +45,7 @@
     <Compile Include="IPhotoManager.cs" />
     <Compile Include="IStoriesManager.cs" />
     <Compile Include="IUsersManager.cs" />
+    <Compile Include="IVideoManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

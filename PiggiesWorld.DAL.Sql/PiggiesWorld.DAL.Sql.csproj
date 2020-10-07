@@ -49,6 +49,7 @@
     <Compile Include="RolesDao.cs" />
     <Compile Include="StoriesDao.cs" />
     <Compile Include="UsersDao.cs" />
+    <Compile Include="VideoDao.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PiggiesWorld.Common.Entities\PiggiesWorld.Common.Entities.csproj">

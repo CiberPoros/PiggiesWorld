@@ -46,6 +46,7 @@
     <Compile Include="IRolesDao.cs" />
     <Compile Include="IStoriesDao.cs" />
     <Compile Include="IUsersDao.cs" />
+    <Compile Include="IVideoDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

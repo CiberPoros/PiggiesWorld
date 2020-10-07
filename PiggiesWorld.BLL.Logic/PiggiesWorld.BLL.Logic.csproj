@@ -46,6 +46,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StoriesManager.cs" />
     <Compile Include="UsersManager.cs" />
+    <Compile Include="VideoManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\PiggiesWorld.BLL.Contracts\PiggiesWorld.BLL.Contracts.csproj">

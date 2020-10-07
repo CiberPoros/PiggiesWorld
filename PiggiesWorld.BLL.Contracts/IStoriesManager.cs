@@ -13,5 +13,6 @@ namespace PiggiesWorld.BLL.Contracts
         void AddStory(Stream previewPhotoStream, Stream photo1Stream, Stream photo2Stream, Story story);
         IEnumerable<(Story story, string uploaderName)> GetStoriesWithUploaders(int count);
         Story GetStoryById(int id);
+        void DeleteStoryById(int id);
     }
 }

@@ -42,6 +42,22 @@ namespace PiggiesWorld.DAL.Sql
             }
         }
 
+        public void DeleteStoryById(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var command = connection.CreateCommand();
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandText = "dbo.gsp_Delete_Story";
+
+                command.Parameters.Add(new SqlParameter("story_id", id));
+
+                connection.Open();
+
+                command.ExecuteScalar();
+            }
+        }
+
         public IEnumerable<(Story story, string uploaderName)> GetStoriesWithUploaders(int count)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))

@@ -14,11 +14,18 @@
     <div class="row">
         @foreach (var item in storiesManager.GetStoriesWithUploaders(storyCount))
         {
-            <div class="m-md-3">
-                <h3>@item.story.Title</h3>
-                <a href="~/Pages/FullPigStory.cshtml?story_id=@(item.story.ID)"><img src="~/Images/Photo/@(item.story.PreviewPhotoName)" alt="@(item.story.Description)" width="300" /></a>
-                <h6>Автор: @(item.uploaderName)</h6>
-                <p>@item.story.Description</p>
+            <div class="card m-md-3 p-md-2" style="width: 250px">
+                <h3 class="card-title">@item.story.Title</h3>
+                <a href="~/Pages/FullPigStory.cshtml?story_id=@(item.story.ID)"><img class="card-img-top img-thumbnail" src="~/Images/Photo/@(item.story.PreviewPhotoName)" alt="@(item.story.Description)" width="300" /></a>
+                <h6 class="card-title">Автор: @(item.uploaderName)</h6>
+                <p class="card-text">@item.story.Description</p>
+
+                @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+                {
+                    <form action="~/Pages/DeleteStory.cshtml?storyID=@(item.story.ID)" method="post">
+                        <input type="submit" class="btn btn-danger" name="delete" value="delete" />
+                    </form>
+                }
             </div>
         }
     </div>
