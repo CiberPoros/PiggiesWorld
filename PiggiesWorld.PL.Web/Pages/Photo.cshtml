@@ -9,30 +9,29 @@
 <div class="container">
     @RenderPage("~/PartialPages/_photo.cshtml")
     <div class="center-block text-center">
-        <a class="btn-secondary" href="~/Pages/Photo.cshtml?photoCount=@(photoCount + 20)">Показать еще</a>
-        @if (User.IsInRole("admin") || User.IsInRole("moderator"))
-        {
-            <button type="button" class="btn-secondary" data-toggle="modal" data-target="#addPhotoModal">Добавить фото</button>
-
-            <div class="modal fade" id="addPhotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">Выберите фото</h4>
-                        </div>
-                        <form action="~/Pages/UploadPhoto.cshtml" enctype="multipart/form-data" method="post">
-                            <div class="modal-body">
-                                <input type="file" name="pig_photo" accept="image/jpeg, image/jpg" value="" required />
-                                <input type="text" name="photo_description" value="" required />
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                                <input type="submit" class="btn btn-primary" name="load_file" value="Загрузить" />
-                            </div>
-                        </form>
+        <div>
+            <a class="btn-secondary" href="~/Pages/Photo.cshtml?photoCount=@(photoCount + 20)">Показать еще</a>
+            <div class="w-100"></div>
+            <button type="button" class="btn-secondary" data-toggle="modal" data-target="#addPhotoModal">Предложить фото</button>
+        </div>
+        <div class="modal fade" id="addPhotoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel">Выберите фото</h4>
                     </div>
+                    <form action="~/Pages/UploadPhoto.cshtml" enctype="multipart/form-data" method="post">
+                        <div class="modal-body">
+                            <input type="file" class="m-md-2" name="pig_photo" accept="image/jpeg, image/jpg" value="" required />
+                            <input type="text" class="m-md-2" name="photo_description" value="" required />
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                            <input type="submit" class="btn btn-primary" name="load_file" value="Загрузить" />
+                        </div>
+                    </form>
                 </div>
             </div>
-        }
+        </div>
     </div>
 </div>

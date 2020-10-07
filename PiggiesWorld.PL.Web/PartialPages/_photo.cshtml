@@ -18,6 +18,9 @@
                 <a data-fancybox="gallery" href="~/Images/Photo/@(item.photo.Path)" data-caption="Автор: @item.uploaderName">
                     <img class="img-responsive" src="~/Images/Photo/@(item.photo.Path)" alt="@item.photo.Description" width="260">
                 </a>
+                <div class="d-flex justify-content-around">
+                    <p>Добавлено @item.photo.UploadDate.ToString("MM/dd/yyyy HH:mm")</p>
+                </div>
                 @if (User.IsInRole("admin") || User.IsInRole("moderator"))
                 {
                     <div class="d-flex justify-content-around">
@@ -26,9 +29,9 @@
                         </form>
                         @if (!item.photo.IsSubmited)
                         {
-                        <form action="~/Pages/Submit.cshtml?photoID=@(item.photo.ID)" method="post">
-                            <input type="submit" class="btn btn-success m-md-2" name="submit_photo" value="submit" />
-                        </form>
+                            <form action="~/Pages/Submit.cshtml?photoID=@(item.photo.ID)" method="post">
+                                <input type="submit" class="btn btn-success m-md-2" name="submit_photo" value="submit" />
+                            </form>
                         }
                     </div>
                 }
