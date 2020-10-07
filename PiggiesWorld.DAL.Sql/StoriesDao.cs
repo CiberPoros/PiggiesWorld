@@ -58,7 +58,7 @@ namespace PiggiesWorld.DAL.Sql
             }
         }
 
-        public IEnumerable<(Story story, string uploaderName)> GetStoriesWithUploaders(int count)
+        public IEnumerable<(Story story, string uploaderName)> GetStoriesWithUploaders(int count, bool submitedOnly)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -67,6 +67,9 @@ namespace PiggiesWorld.DAL.Sql
                     " FROM user_story" +
                     " LEFT JOIN [user]" +
                     " ON [user].id = user_story.user_id";
+
+                if (submitedOnly)
+                    query += " WHERE user_story.flag_submited = 1";
 
                 var command = new SqlCommand(query, connection);
 
@@ -88,7 +91,8 @@ namespace PiggiesWorld.DAL.Sql
                         Information1 = reader["inf1"] == DBNull.Value ? null : (string)reader["inf1"],
                         Header2 = reader["header2"] == DBNull.Value ? null : (string)reader["header2"],
                         PhotoName2 = reader["photo2"] == DBNull.Value ? null : (string)reader["photo2"],
-                        Information2 = reader["inf2"] == DBNull.Value ? null : (string)reader["inf2"]
+                        Information2 = reader["inf2"] == DBNull.Value ? null : (string)reader["inf2"],
+                        IsSubmited = (bool)reader["flag_submited"]
                     };
 
                     var uploaderName = (string)reader["user_name"];
@@ -126,11 +130,28 @@ namespace PiggiesWorld.DAL.Sql
                         Information1 = reader["inf1"] == DBNull.Value ? null : (string)reader["inf1"],
                         Header2 = reader["header2"] == DBNull.Value ? null : (string)reader["header2"],
                         PhotoName2 = reader["photo2"] == DBNull.Value ? null : (string)reader["photo2"],
-                        Information2 = reader["inf2"] == DBNull.Value ? null : (string)reader["inf2"]
+                        Information2 = reader["inf2"] == DBNull.Value ? null : (string)reader["inf2"],
+                        IsSubmited = (bool)reader["flag_submited"]
                     };
                 }
 
                 return null;
+            }
+        }
+
+        public void Submit(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var command = connection.CreateCommand();
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandText = "dbo.gsp_Submit_Story";
+
+                command.Parameters.Add(new SqlParameter("story_id", id));
+
+                connection.Open();
+
+                command.ExecuteScalar();
             }
         }
     }

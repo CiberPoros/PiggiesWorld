@@ -35,7 +35,9 @@ namespace PiggiesWorld.BLL.Logic
         }
 
         public void DeleteStoryById(int id) => _storiesDao.DeleteStoryById(id);
-        public IEnumerable<(Story story, string uploaderName)> GetStoriesWithUploaders(int count) => _storiesDao.GetStoriesWithUploaders(count);
+        public IEnumerable<(Story story, string uploaderName)> GetStoriesWithUploaders(int count, bool submitedOnly) => 
+            _storiesDao.GetStoriesWithUploaders(count, submitedOnly);
         public Story GetStoryById(int id) => _storiesDao.GetStoryById(id);
+        public void Submit(int id) => _storiesDao.Submit(id);
     }
 }

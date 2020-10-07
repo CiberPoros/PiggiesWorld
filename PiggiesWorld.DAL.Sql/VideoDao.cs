@@ -28,7 +28,23 @@ namespace PiggiesWorld.DAL.Sql
             }
         }
 
-        public IEnumerable<(Video video, string uploaderName)> GetVideoWithUploaders(int count)
+        public void DeleteVideoById(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var command = connection.CreateCommand();
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandText = "dbo.gsp_Delete_Video";
+
+                command.Parameters.Add(new SqlParameter("video_id", id));
+
+                connection.Open();
+
+                command.ExecuteScalar();
+            }
+        }
+
+        public IEnumerable<(Video video, string uploaderName)> GetVideoWithUploaders(int count, bool submitedOnly)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -37,6 +53,9 @@ namespace PiggiesWorld.DAL.Sql
                     " FROM user_video" +
                     " LEFT JOIN [user]" +
                     " ON [user].id = user_video.user_id";
+
+                if (submitedOnly)
+                    query += " WHERE user_video.flag_submited = 1";
 
                 var command = new SqlCommand(query, connection);
 
@@ -50,13 +69,30 @@ namespace PiggiesWorld.DAL.Sql
                         ID = (int)reader["id"],
                         Url = (string)reader["url"],
                         Description = (string)reader["description"],
-                        UploadDate = (DateTime)reader["upload_date"]
+                        UploadDate = (DateTime)reader["upload_date"],
+                        IsSubmited = (bool)reader["flag_submited"]
                     };
 
                     var uploaderName = (string)reader["user_name"];
 
                     yield return (video, uploaderName);
                 }
+            }
+        }
+
+        public void Submit(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var command = connection.CreateCommand();
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandText = "dbo.gsp_Submit_Video";
+
+                command.Parameters.Add(new SqlParameter("video_id", id));
+
+                connection.Open();
+
+                command.ExecuteScalar();
             }
         }
     }

@@ -24,7 +24,7 @@
             <img class="mx-auto d-block img-thumbnail" src="~/Images/Photo/@(story.PreviewPhotoName)" alt="@(story.Description)" />
             <div class="card-body">
                 <h2 class="card-title">@story.Title</h2>
-                <p class="card-text" align="left" style="white-space: pre-wrap;">@story.Body</p>
+                <p class="card-text" align="justify" style="white-space: pre-wrap;">@story.Body</p>
                 @if (!(story.Header1 is null))
                 {
                     <h4 class="card-title">@story.Header1</h4>
@@ -35,7 +35,7 @@
                 }
                 @if (!(story.Information1 is null))
                 {
-                    <p class="card-text">@story.Information1</p>
+                    <p class="card-text" align="justify">@story.Information1</p>
                 }
                 @if (!(story.Header2 is null))
                 {
@@ -47,7 +47,7 @@
                 }
                 @if (!(story.Information2 is null))
                 {
-                    <p class="card-text">@story.Information2</p>
+                    <p class="card-text" align="justify">@story.Information2</p>
                 }
             </div>
         </div>

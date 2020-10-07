@@ -16,6 +16,9 @@ namespace PiggiesWorld.BLL.Logic
         }
 
         public void AddVideo(Video video) => _videoDao.AddVideo(video);
-        public IEnumerable<(Video video, string uploaderName)> GetVideoWithUploaders(int count) => _videoDao.GetVideoWithUploaders(count);
+        public void DeleteVideoById(int id) => _videoDao.DeleteVideoById(id);
+        public IEnumerable<(Video video, string uploaderName)> GetVideoWithUploaders(int count, bool submitedOnly) => 
+            _videoDao.GetVideoWithUploaders(count, submitedOnly);
+        public void Submit(int id) => _videoDao.Submit(id);
     }
 }

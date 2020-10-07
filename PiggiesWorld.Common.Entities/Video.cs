@@ -14,5 +14,6 @@ namespace PiggiesWorld.Common.Entities
         public int UserID { get; set; }
         public string Description { get; set; }
         public DateTime UploadDate { get; set; }
+        public bool IsSubmited { get; set; }
     }
 }

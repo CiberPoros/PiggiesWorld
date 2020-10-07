@@ -1,0 +1,50 @@
+﻿@using PiggiesWorld.Common.Entities;
+@using PiggiesWorld.BLL.Contracts;
+@using PiggiesWorld.PL.Web.Models;
+@using Ninject;
+
+@{
+    Layout = null;
+
+    if (!User.IsInRole("admin") && !User.IsInRole("moderator"))
+    {
+        Response.Redirect("~/index.cshtml");
+    }
+
+    if (IsPost)
+    {
+        ISubmitEntityManager submitEntityManager = null;
+        int id = -1;
+        string redirectString = string.Empty;
+
+        if (!string.IsNullOrEmpty(Request["photoID"]))
+        {
+            submitEntityManager = DependencesResolver.Resolver.Get<IPhotoManager>();
+            id = int.Parse(Request["photoID"]);
+            redirectString = "~/Pages/Photo.cshtml";
+        }
+        else if (!string.IsNullOrEmpty(Request["videoID"]))
+        {
+            submitEntityManager = DependencesResolver.Resolver.Get<IVideoManager>();
+            id = int.Parse(Request["videoID"]);
+            redirectString = "~/Pages/Video.cshtml";
+        }
+        else if (!string.IsNullOrEmpty(Request["storyID"]))
+        {
+            submitEntityManager = DependencesResolver.Resolver.Get<IStoriesManager>();
+            id = int.Parse(Request["storyID"]);
+            redirectString = "~/Pages/PigStories.cshtml";
+        }
+        else
+        {
+            Response.Redirect("~/index.cshtml");
+        }
+
+        submitEntityManager?.Submit(id);
+
+        Response.Redirect(redirectString);
+    }
+
+    Response.Redirect("~/index.cshtml");
+}
+

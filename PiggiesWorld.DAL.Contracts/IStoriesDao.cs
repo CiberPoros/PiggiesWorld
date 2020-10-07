@@ -3,11 +3,11 @@ using PiggiesWorld.Common.Entities;
 
 namespace PiggiesWorld.DAL.Contracts
 {
-    public interface IStoriesDao
+    public interface IStoriesDao : ISubmitEntityDao
     {
         void AddStory(Story story);
 
-        IEnumerable<(Story story, string uploaderName)> GetStoriesWithUploaders(int count);
+        IEnumerable<(Story story, string uploaderName)> GetStoriesWithUploaders(int count, bool submitedOnly);
 
         Story GetStoryById(int id);
 

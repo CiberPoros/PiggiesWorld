@@ -1,0 +1,24 @@
+﻿@using PiggiesWorld.PL.Web.Models;
+@using PiggiesWorld.Common.Entities;
+@using PiggiesWorld.BLL.Contracts;
+@using Ninject;
+
+@{
+    Layout = null;
+
+    if (!User.IsInRole("admin") && !User.IsInRole("moderator"))
+    {
+        Response.Redirect("~/Pages/Video.cshtml");
+    }
+
+    if (IsPost)
+    {
+        var videoId = int.Parse(Request["videoId"]);
+        var videoManager = DependencesResolver.Resolver.Get<IVideoManager>();
+
+        videoManager.DeleteVideoById(videoId);
+    }
+
+    Response.Redirect("~/Pages/Video.cshtml");
+}
+

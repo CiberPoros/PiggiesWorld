@@ -44,7 +44,7 @@ namespace PiggiesWorld.DAL.Sql
             }
         }
 
-        public IEnumerable<(Photo photo, string uploaderName)> GetPhotoWithUploaders(int count)
+        public IEnumerable<(Photo photo, string uploaderName)> GetPhotoWithUploaders(int count, bool submitedOnly)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
@@ -53,6 +53,9 @@ namespace PiggiesWorld.DAL.Sql
                     " FROM user_photo" +
                     " LEFT JOIN [user]" +
                     " ON [user].id = user_photo.user_id";
+
+                if (submitedOnly)
+                    query += " WHERE user_photo.flag_submited = 1";
 
                 var command = new SqlCommand(query, connection);
 
@@ -67,14 +70,31 @@ namespace PiggiesWorld.DAL.Sql
                         Description = (string)reader["description"],
                         Path = (string)reader["path"],
                         Rating = (float)reader["rating"],
-                        VotesCount = (int)reader["votes_count"],
-                        UploadDate = (DateTime)reader["upload_date"]
+                        VotesCount = (int)reader["votes_count"],                
+                        UploadDate = (DateTime)reader["upload_date"],
+                        IsSubmited = (bool)reader["flag_submited"]
                     };
 
                     var uploaderName = (string)reader["user_name"];
 
                     yield return (photo, uploaderName);
                 }
+            }
+        }
+
+        public void Submit(int id)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var command = connection.CreateCommand();
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandText = "dbo.gsp_Submit_Photo";
+
+                command.Parameters.Add(new SqlParameter("photo_id", id));
+
+                connection.Open();
+
+                command.ExecuteScalar();
             }
         }
     }

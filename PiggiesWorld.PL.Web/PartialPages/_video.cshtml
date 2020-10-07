@@ -12,7 +12,7 @@
 
 <div class="video-container">
     <div class="row">
-        @foreach (var item in vedeoManager.GetVideoWithUploaders(videoCount))
+        @foreach (var item in vedeoManager.GetVideoWithUploaders(videoCount, !(User.IsInRole("admin") || User.IsInRole("moderator"))))
         {
             <div class="card m-md-3 p-md-2 thumb text-center">
                 <h6>@item.video.Description</h6>
@@ -23,9 +23,17 @@
                 </div>
                 @if (User.IsInRole("admin") || User.IsInRole("moderator"))
                 {
-                    <form action="~/Pages/DeleteVideo.cshtml?videoID=@(item.video.ID)" method="post">
-                        <input type="submit" class="btn btn-danger m-md-2" name="delete" value="delete" />
-                    </form>
+                    <div class="d-flex justify-content-around">
+                        <form action="~/Pages/DeleteVideo.cshtml?videoID=@(item.video.ID)" method="post">
+                            <input type="submit" class="btn btn-danger m-md-2" name="delete" value="delete" />
+                        </form>
+                        @if (!item.video.IsSubmited)
+                        {
+                            <form action="~/Pages/Submit.cshtml?videoID=@(item.video.ID)" method="post">
+                                <input type="submit" class="btn btn-success m-md-2" name="submit_video" value="submit" />
+                            </form>
+                        }
+                    </div>
                 }
             </div>
         }

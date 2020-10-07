@@ -26,6 +26,8 @@ namespace PiggiesWorld.BLL.Logic
         }
 
         public void DeletePhotoById(int photoID) => _photoDao.DeletePhotoById(photoID);
-        public IEnumerable<(Photo photo, string uploaderName)> GetPhotoWithUploaders(int count) => _photoDao.GetPhotoWithUploaders(count);
+        public IEnumerable<(Photo photo, string uploaderName)> GetPhotoWithUploaders(int count, bool submitedOnly) => 
+            _photoDao.GetPhotoWithUploaders(count, submitedOnly);
+        public void Submit(int id) => _photoDao.Submit(id);
     }
 }

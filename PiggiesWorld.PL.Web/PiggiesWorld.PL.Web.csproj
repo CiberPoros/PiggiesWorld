@@ -158,6 +158,8 @@
     <Content Include="PartialPages\_video.cshtml" />
     <Content Include="Pages\UploadVideo.cshtml" />
     <Content Include="Pages\MainPage.cshtml" />
+    <Content Include="Pages\Submit.cshtml" />
+    <Content Include="Pages\DeleteVideo.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />

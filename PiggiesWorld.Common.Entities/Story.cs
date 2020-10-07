@@ -14,5 +14,6 @@
         public string PhotoName2 { get; set; }
         public string Information2 { get; set; }
         public int UserID { get; set; }
+        public bool IsSubmited { get; set; }
     }
 }

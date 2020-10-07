@@ -12,7 +12,7 @@
 
 <div class="stories-container">
     <div class="row">
-        @foreach (var item in storiesManager.GetStoriesWithUploaders(storyCount))
+        @foreach (var item in storiesManager.GetStoriesWithUploaders(storyCount, !(User.IsInRole("admin") || User.IsInRole("moderator"))))
         {
             <div class="card m-md-3 p-md-2" style="width: 250px">
                 <h3 class="card-title">@item.story.Title</h3>
@@ -22,9 +22,17 @@
 
                 @if (User.IsInRole("admin") || User.IsInRole("moderator"))
                 {
-                    <form action="~/Pages/DeleteStory.cshtml?storyID=@(item.story.ID)" method="post">
-                        <input type="submit" class="btn btn-danger" name="delete" value="delete" />
-                    </form>
+                    <div class="d-flex justify-content-around">
+                        <form action="~/Pages/DeleteStory.cshtml?storyID=@(item.story.ID)" method="post">
+                            <input type="submit" class="btn btn-danger m-md-2" name="delete" value="delete" />
+                        </form>
+                        @if (!item.story.IsSubmited)
+                        {
+                            <form action="~/Pages/Submit.cshtml?storyID=@(item.story.ID)" method="post">
+                                <input type="submit" class="btn btn-success m-md-2" name="submit_story" value="submit" />
+                            </form>
+                        }
+                    </div>
                 }
             </div>
         }
