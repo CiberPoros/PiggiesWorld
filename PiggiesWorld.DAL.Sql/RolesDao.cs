@@ -35,10 +35,10 @@ namespace PiggiesWorld.DAL.Sql
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
-                var query =
-                    "SELECT role.* FROM role" +
-                    " INNER JOIN user_role_association" +
-                    $" ON user_role_association.user_id = {userID}";
+
+                var query = "SELECT * FROM [role]" +
+                    $" INNER JOIN (SELECT * FROM user_role_association WHERE user_role_association.user_id = {userID}) AS ura" +
+                    $" ON [role].id = ura.role_id";
 
                 var command = new SqlCommand(query, connection);
 
