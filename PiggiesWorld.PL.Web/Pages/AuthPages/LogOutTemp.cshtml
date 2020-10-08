@@ -1,5 +1,10 @@
-﻿@{
+﻿@using PiggiesWorld.PL.Web.Models; 
+
+@{
     Layout = null;
+
+    Logger.Log.Info($"user is logged out; user name {User.Identity.Name}");
+
     FormsAuthentication.SignOut();
 
     Response.Redirect("~");

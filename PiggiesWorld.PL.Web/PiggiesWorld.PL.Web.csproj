@@ -45,6 +45,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net, Version=2.0.11.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.11\lib\net45\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -165,6 +168,8 @@
     <Content Include="Pages\VideoPages\DeleteVideoTemp.cshtml" />
     <Content Include="Pages\AdministrationPages\Administration.cshtml" />
     <Content Include="Pages\AdministrationPages\ChangeUserRoles.cshtml" />
+    <Content Include="Pages\AuthPages\LogInTemp.cshtml" />
+    <Content Include="Pages\AuthPages\RegistrationTemp.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -252,6 +257,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\DependencesResolver.cs" />
+    <Compile Include="Models\Logger.cs" />
     <Compile Include="Models\UsersRoleProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

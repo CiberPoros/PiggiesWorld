@@ -17,7 +17,7 @@
                 <h6>@item.video.Description</h6>
                 <iframe src="@(item.video.Url)" width="480" height="360" frameborder="1" allowfullscreen></iframe>
                 <div class="d-flex justify-content-around">
-                    <p>Добавлено @item.video.UploadDate.ToString("MM/dd/yyyy HH:mm")</p>
+                    <p>Добавлено @item.video.UploadDate.ToString("MM.dd.yyyy HH:mm")</p>
                     <p>Автор: @item.uploaderName</p>
                 </div>
                 @if (User.IsInRole("admin") || User.IsInRole("moderator"))

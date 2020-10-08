@@ -56,5 +56,9 @@ function isCorrectSymbol(char) {
 }
 
 function validateForm() {
+    var element = document.getElementById("error-massage");
+    if (element != null)
+        element.remove();
+
     return validateLogin() && validatePassword();
 }

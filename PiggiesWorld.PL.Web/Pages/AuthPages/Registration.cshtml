@@ -6,37 +6,17 @@
 @{
     Layout = "/Layouts/_externalLayout.cshtml";
 
-    var authManager = DependencesResolver.Resolver.Get<IAuthManager>();
-
-    if (IsPost)
-    {
-        if (DateTime.TryParse(Request["birthDay"], out DateTime dateOfBirth))
-        {
-            var userName = Request["login"];
-
-            if (authManager.RegisterUser(new User { LoginName = userName, BirthDay = dateOfBirth }, Request["password"]))
-            {
-                FormsAuthentication.SetAuthCookie(userName, createPersistentCookie: true);
-                Response.Redirect("~");
-            }
-            else
-            {
-                // TODO: user already exists
-                Response.Redirect("~/Pages/AuthPages/Registration.cshtml");
-            }
-        }
-        else
-        {
-            // TODO: incorrect data format
-            Response.Redirect("~/Pages/AuthPages/Registration.cshtml");
-        }
-    }
+    bool isIncorrect = Request["incorrect"] == "true";
 }
 
 <link href="~/Content/auth.css" rel="stylesheet" />
 <div>
-    <form class="box" action="~/Pages/AuthPages/Registration.cshtml" onsubmit="return validateForm()" method="post">
+    <form class="box" action="~/Pages/AuthPages/RegistrationTemp.cshtml" onsubmit="return validateForm()" method="post">
         <h1>Регистрация</h1>
+        @if (isIncorrect)
+        {
+            <p id="error-massage" class="text-danger">Неверно указан логин или пароль!</p>
+        }
         <input id="login" type="text" placeholder="Имя пользователя" maxlength="20" name="login" required>
         <input id="pass" type="password" placeholder="Пароль" maxlength="20" name="password" required>
         <input type="date" placeholder="Дата рождения" name="birthDay" required>

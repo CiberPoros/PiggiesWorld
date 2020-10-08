@@ -1,0 +1,34 @@
+﻿@using PiggiesWorld.PL.Web.Models;
+@using Ninject;
+@using PiggiesWorld.BLL.Contracts;
+
+@{
+    Layout = null;
+
+    var authManager = DependencesResolver.Resolver.Get<IAuthManager>();
+    var validationManager = DependencesResolver.Resolver.Get<IAuthValudationManager>();
+
+    if (IsPost)
+    {
+        var login = Request["login"];
+        var password = Request["password"];
+
+        if (!validationManager.IsValidLogin(login) || !validationManager.IsValidPassword(password))
+        {
+            Response.Redirect("~/Pages/AuthPages/LogIn.cshtml?incorrect=true");
+        }
+
+        if (authManager.IsCorrectPassword(login, password))
+        {
+            FormsAuthentication.SetAuthCookie(login, createPersistentCookie: true);
+            Logger.Log.Info($"user is logged in; user name {login}");
+            Response.Redirect("~");
+        }
+        else
+        {
+            Response.Redirect("~/Pages/AuthPages/LogIn.cshtml?incorrect=true");
+        }
+
+        Response.Redirect("~/Pages/AuthPages/LogIn.cshtml");
+    }
+}
