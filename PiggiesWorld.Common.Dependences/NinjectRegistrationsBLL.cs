@@ -18,6 +18,7 @@ namespace PiggiesWorld.Common.Dependences
             Bind<IAuthManager>().To<AuthManager>().InSingletonScope();
             Bind<IStoriesManager>().To<StoriesManager>().InSingletonScope();
             Bind<IVideoManager>().To<VideoManager>().InSingletonScope();
+            Bind<IRolesManager>().To<RolesManager>().InSingletonScope();
         }
     }
 }

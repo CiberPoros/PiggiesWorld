@@ -27,5 +27,7 @@ namespace PiggiesWorld.BLL.Logic
         }
 
         public IEnumerable<Role> GetUsersRolesByUserID(int userID) => _rolesDao.GetRolesByUserId(userID);
+
+        public IEnumerable<User> GetUsersWithRoles(int count) => _usersDao.GetUsersWithRoles(count);
     }
 }

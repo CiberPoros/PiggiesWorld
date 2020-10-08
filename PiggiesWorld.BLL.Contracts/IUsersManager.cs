@@ -13,6 +13,8 @@ namespace PiggiesWorld.BLL.Contracts
 
         User GetUserByLogin(string login);
 
+        IEnumerable<User> GetUsersWithRoles(int count);
+
         IEnumerable<Role> GetUsersRolesByUserID(int userID);
 
         IEnumerable<Role> GetUsersRolesByLogin(string login);

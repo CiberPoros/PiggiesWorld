@@ -5,12 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using PiggiesWorld.Common.Entities;
 
-namespace PiggiesWorld.DAL.Contracts
+namespace PiggiesWorld.BLL.Contracts
 {
-    public interface IRolesDao
+    public interface IRolesManager
     {
-        IEnumerable<Role> GetRolesByUserId(int userID);
         IEnumerable<Role> GetAllRoles();
-        void UpdateRolesForUser(IEnumerable<Role> roles, int userID);
+        void UpdateRolesForUser(IEnumerable<Role> roles, int userId);
     }
 }

@@ -15,7 +15,10 @@
     <div>
         <a class="btn-secondary" href="~/Pages/PigStories.cshtml?storyCount=@(storyCount + 20)">Показать еще</a>
         <div class="w-100"></div>
-        <button type="button" class="btn-secondary" data-toggle="modal" data-target="#addStoryModal">Предложить пиго-историю</button>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <button type="button" class="btn-secondary" data-toggle="modal" data-target="#addStoryModal">Предложить пиго-историю</button>
+        }
     </div>
     <div class="modal fade" id="addStoryModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

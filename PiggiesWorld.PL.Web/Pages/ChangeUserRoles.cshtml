@@ -1,0 +1,29 @@
+﻿@using PiggiesWorld.PL.Web.Models;
+@using PiggiesWorld.BLL.Contracts;
+@using Ninject;
+
+@{
+    Layout = null;
+
+    if (!User.IsInRole("admin"))
+    {
+        Response.Redirect("~/");
+    }
+
+    if (IsPost)
+    {
+        var rolesManager = DependencesResolver.Resolver.Get<IRolesManager>();
+        var usersManager = DependencesResolver.Resolver.Get<IUsersManager>();
+
+        var allRoles = rolesManager.GetAllRoles();
+        var roles = allRoles.Where(role => Request[role.Title] != null).ToArray();
+
+        var user = usersManager.GetUserByLogin(User.Identity.Name);
+
+        var userId = int.Parse(Request["id"]);
+
+        rolesManager.UpdateRolesForUser(roles, userId);
+    }
+
+    Response.Redirect("~/Pages/Administration.cshtml");
+}

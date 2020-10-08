@@ -20,7 +20,6 @@
         var videoManager = DependencesResolver.Resolver.Get<IVideoManager>();
 
         videoManager.AddVideo(new Video { Url = url, Description = description, UserID = usersManager.GetUserByLogin(User.Identity.Name).ID, UploadDate = DateTime.Now});
-
     }
 
     Response.Redirect("~/Pages/Video.cshtml");

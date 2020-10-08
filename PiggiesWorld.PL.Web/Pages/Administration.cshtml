@@ -1,17 +1,51 @@
-﻿@{
-    Layout = null;
+﻿@using PiggiesWorld.BLL.Contracts;
+@using PiggiesWorld.PL.Web.Models;
+@using Ninject;
+
+@{
+    Layout = "/Layouts/_externalLayout.cshtml";
+
+    if (!User.IsInRole("admin"))
+    {
+        Response.Redirect("~/");
+    }
+
+    int usersCount = Request["usersCount"] == null ? 20 : int.Parse(Request["usersCount"]);
+
+    var usersManager = DependencesResolver.Resolver.Get<IUsersManager>();
+    var rolesManager = DependencesResolver.Resolver.Get<IRolesManager>();
+
+    var users = usersManager.GetUsersWithRoles(usersCount);
+    var roles = rolesManager.GetAllRoles();
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+<div class="container">
+    <div class="row">
+        @foreach (var user in users)
+        {
+            <div class="card m-md-3 p-md-2" style="width: 250px">
+                <h3 class="card-title">@user.LoginName</h3>
+                <p class="card-text">День рождния: @(user.BirthDay)</p>
+                <p class="card-text">Возраст: @(user.Age)</p>
+                <form action="~/Pages/ChangeUserRoles.cshtml?id=@user.ID" method="post">
+                    <div>
+                        @foreach (var role in roles)
+                        {
+                            if (user.Roles.Contains(role))
+                            {
+                                <input id="@role.Title" type="radio" class="radio" name="@role.Title" value="@role.Title" checked>
+                            }
+                            else
+                            {
+                                <input id="@role.Title" type="radio" class="radio" name="@role.Title" value="@role.Title">
+                            }
+                            <label for="@role.Title">@role.Title</label>
+                            <div class="w-100"></div>
+                        }
+                    </div>
+                    <input type="submit" class="btn btn-success m-md-2" name="submit_changes" value="submit" />
+                </form>
+            </div>
+        }
     </div>
-</body>
-</html>
+</div>

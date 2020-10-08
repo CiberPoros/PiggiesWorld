@@ -13,27 +13,8 @@
     <link href="~/Content/photo.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <link href="~/Content/font-awesome.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha512-H9jrZiiopUdsLpg94A333EfumgUBpO9MdbxStdeITo+KEIMaNfHNvwyjjDJb+ERPaRS6DpyRlKbvPUasNItRyw==" crossorigin="anonymous" />
-    @*<link href="~/Content/jquery.fancybox.css" rel="stylesheet" />*@
-    <style>
-        .thumb img {
-            -webkit-filter: grayscale(0);
-            filter: none;
-            border-radius: 5px;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            padding: 5px;
-        }
-
-            .thumb img:hover {
-                -webkit-filter: grayscale(1);
-                filter: grayscale(1);
-            }
-
-        .thumb {
-            padding: 5px;
-        }
-    </style>
+    <link href="~/Content/fancybox-try.css" rel="stylesheet" />
+    <link href="~/Content/image-styles.css" rel="stylesheet" />
 </head>
 <body>
     <div class="main-body">
@@ -47,10 +28,9 @@
             @RenderPage("~/PartialPages/_footer.cshtml")
         </footer>
     </div>
-
 <script src="~/Scripts/jquery-3.0.0.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
-@*<script src="~/Scripts/jquery.fancybox.js"></script>*@
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha512-uURl+ZXMBrF4AwGaWmEetzrd+J5/8NRkWAvJx5sbPSSuOb0bZLqf+tOzniObO00BjHa/dD7gub9oCGMLPQHtQA==" crossorigin="anonymous"></script>
+<script src="~/Scripts/fancybox-try.js"></script>
+<script src="~/JS/uncheck-radio-buttons.js"></script>
 </body>
 </html>

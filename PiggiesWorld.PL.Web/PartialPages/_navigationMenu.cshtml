@@ -8,7 +8,9 @@
         <li class="nav-item"><a class="nav-link" href="~/Pages/Video.cshtml">Видео</a></li>
         <li class="nav-item"><a class="nav-link" href="~/Pages/PigStories.cshtml">Пиго-истории</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Ищу хозяина</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Контакты</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Администрирование</a></li>
+        @if (User.IsInRole("admin"))
+        {
+            <li class="nav-item"><a class="nav-link" href="~/Pages/Administration.cshtml">Администрирование</a></li>
+        }
     </ul>
 </div>
