@@ -7,7 +7,7 @@
 
     if (!User.IsInRole("admin") && !User.IsInRole("moderator"))
     {
-        Response.Redirect("~/Pages/Photo.cshtml");
+        Response.Redirect("~/Pages/PhotoPages/Photo.cshtml");
     }
 
     if (IsPost)
@@ -25,5 +25,5 @@
         photoManager.AddPhoto(stream, $"{path}\\{Path.GetFileName(file.FileName)}", description, usersManager.GetUserByLogin(User.Identity.Name));
     }
 
-    Response.Redirect("~/Pages/Photo.cshtml");
+    Response.Redirect("~/Pages/PhotoPages/Photo.cshtml");
 }

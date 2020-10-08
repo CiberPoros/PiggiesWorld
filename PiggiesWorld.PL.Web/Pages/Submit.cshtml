@@ -20,7 +20,7 @@
         {
             submitEntityManager = DependencesResolver.Resolver.Get<IPhotoManager>();
             id = int.Parse(Request["photoID"]);
-            redirectString = "~/Pages/Photo.cshtml";
+            redirectString = "~/Pages/PhotoPages/Photo.cshtml";
         }
         else if (!string.IsNullOrEmpty(Request["videoID"]))
         {

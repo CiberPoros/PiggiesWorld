@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using PiggiesWorld.BLL.Contracts;
 using PiggiesWorld.Common.Entities;
 using PiggiesWorld.DAL.Contracts;

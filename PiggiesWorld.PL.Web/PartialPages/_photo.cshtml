@@ -23,7 +23,7 @@
                 @if (User.IsInRole("admin") || User.IsInRole("moderator"))
                 {
                     <div class="d-flex justify-content-around">
-                        <form action="~/Pages/DeletePhoto.cshtml?photoID=@(item.photo.ID)" method="post">
+                        <form action="~/Pages/PhotoPages/DeletePhotoTemp.cshtml?photoID=@(item.photo.ID)" method="post">
                             <input type="submit" class="btn btn-danger m-md-2" name="delete" value="delete" />
                         </form>
                         @if (!item.photo.IsSubmited)

@@ -7,7 +7,7 @@
 
     if (!User.IsInRole("admin") && !User.IsInRole("moderator"))
     {
-        Response.Redirect("~/Pages/Photo.cshtml");
+        Response.Redirect("~/Pages/PhotoPages/Photo.cshtml");
     }
 
     if (IsPost)
@@ -18,5 +18,5 @@
         photoManager.DeletePhotoById(photoId);
     }
 
-    Response.Redirect("~/Pages/Photo.cshtml");
+    Response.Redirect("~/Pages/PhotoPages/Photo.cshtml");
 }

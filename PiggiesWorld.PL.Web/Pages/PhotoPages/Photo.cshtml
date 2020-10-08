@@ -10,7 +10,7 @@
     @RenderPage("~/PartialPages/_photo.cshtml")
     <div class="center-block text-center">
         <div>
-            <a class="btn-secondary" href="~/Pages/Photo.cshtml?photoCount=@(photoCount + 20)">Показать еще</a>
+            <a class="btn-secondary" href="~/Pages/PhotoPages/Photo.cshtml?photoCount=@(photoCount + 20)">Показать еще</a>
             <div class="w-100"></div>
             @if (User.Identity.IsAuthenticated)
             {
@@ -23,7 +23,7 @@
                     <div class="modal-header">
                         <h4 class="modal-title" id="myModalLabel">Выберите фото</h4>
                     </div>
-                    <form action="~/Pages/UploadPhoto.cshtml" enctype="multipart/form-data" method="post">
+                    <form action="~/Pages/PhotoPages/UploadPhotoTemp.cshtml" enctype="multipart/form-data" method="post">
                         <div class="modal-body">
                             <input type="file" class="m-md-2" name="pig_photo" accept="image/jpeg, image/jpg" value="" required />
                             <input type="text" class="m-md-2" name="photo_description" value="" required />

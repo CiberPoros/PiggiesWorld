@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Linq;
 using PiggiesWorld.Common.Entities;
 using PiggiesWorld.DAL.Contracts;
 using PiggiesWorld.DAL.Sql.Abstract;
@@ -83,7 +82,6 @@ namespace PiggiesWorld.DAL.Sql
                     command.ExecuteScalar();
                 }
             }
-   
         }
     }
 }

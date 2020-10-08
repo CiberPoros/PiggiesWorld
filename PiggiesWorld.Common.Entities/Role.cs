@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using PiggiesWorld.Common.Entities.Contracts;
 
 namespace PiggiesWorld.Common.Entities
 {
-    public class Role : IEntityWithId
+    public class Role
     {
         public int ID { get; set; }
         public string Title { get; set; }

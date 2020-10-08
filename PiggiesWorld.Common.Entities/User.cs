@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using PiggiesWorld.Common.Entities.Contracts;
 
 namespace PiggiesWorld.Common.Entities
 {
-    public class User : IEntityWithId
+    public class User 
     {
         public int ID { get; set; }
         public string LoginName { get; set; }

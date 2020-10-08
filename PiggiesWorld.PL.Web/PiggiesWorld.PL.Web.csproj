@@ -146,8 +146,8 @@
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
     <Content Include="Pages\LogOut.cshtml" />
-    <Content Include="Pages\DeletePhoto.cshtml" />
-    <Content Include="Pages\UploadPhoto.cshtml" />
+    <Content Include="Pages\PhotoPages\DeletePhotoTemp.cshtml" />
+    <Content Include="Pages\PhotoPages\UploadPhotoTemp.cshtml" />
     <Content Include="Pages\PigStories.cshtml" />
     <Content Include="Pages\UploadStory.cshtml" />
     <Content Include="PartialPages\_story.cshtml" />
@@ -260,7 +260,7 @@
     <Content Include="Layouts\_externalLayout.cshtml" />
     <Content Include="Pages\Registration.cshtml" />
     <Content Include="Pages\LogIn.cshtml" />
-    <Content Include="Pages\Photo.cshtml" />
+    <Content Include="Pages\PhotoPages\Photo.cshtml" />
     <None Include="packages.config" />
     <Content Include="PartialPages\_header.cshtml" />
     <Content Include="PartialPages\_footer.cshtml" />
@@ -306,7 +306,10 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Pages\StoriesPages\" />
+    <Folder Include="Pages\VideoPages\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
