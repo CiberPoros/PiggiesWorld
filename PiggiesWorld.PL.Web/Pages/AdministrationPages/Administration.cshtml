@@ -11,7 +11,6 @@
     }
 
     int usersCount = Request["usersCount"] == null ? 20 : int.Parse(Request["usersCount"]);
-
     var usersManager = DependencesResolver.Resolver.Get<IUsersManager>();
     var rolesManager = DependencesResolver.Resolver.Get<IRolesManager>();
 

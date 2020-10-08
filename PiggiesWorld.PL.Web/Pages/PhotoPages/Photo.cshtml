@@ -2,7 +2,6 @@
     Layout = "/Layouts/_externalLayout.cshtml";
 
     int photoCount = Request["photoCount"] == null ? 20 : int.Parse(Request["photoCount"]);
-
     Page.PhotoCount = photoCount;
 }
 
