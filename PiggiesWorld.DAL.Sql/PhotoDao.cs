@@ -57,6 +57,8 @@ namespace PiggiesWorld.DAL.Sql
                 if (submitedOnly)
                     query += " WHERE user_photo.flag_submited = 1";
 
+                query += " ORDER BY user_photo.upload_date DESC";
+
                 var command = new SqlCommand(query, connection);
 
                 connection.Open();

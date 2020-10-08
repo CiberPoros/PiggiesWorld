@@ -6,7 +6,7 @@
 @{
     Layout = null;
 
-    if (!User.IsInRole("admin") && !User.IsInRole("moderator"))
+    if (!User.Identity.IsAuthenticated)
     {
         Response.Redirect("~/Pages/StoriesPages/PigStories.cshtml");
     }
