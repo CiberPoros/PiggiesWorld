@@ -25,8 +25,8 @@
                     </div>
                     <form action="~/Pages/VideoPages/UploadVideoTemp.cshtml" enctype="multipart/form-data" method="post">
                         <div class="modal-body">
-                            <input type="text" name="video_link" value="" placeholder="URL" required />
-                            <input type="text" name="video_description" value="" placeholder="краткое описание" required />
+                            <input type="text" name="video_link" value="" maxlength="200" placeholder="URL" required />
+                            <input type="text" name="video_description" value="" maxlength="30" placeholder="краткое описание" required />
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>

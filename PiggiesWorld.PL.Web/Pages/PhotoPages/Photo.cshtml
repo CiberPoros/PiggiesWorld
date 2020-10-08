@@ -26,7 +26,7 @@
                     <form action="~/Pages/PhotoPages/UploadPhotoTemp.cshtml" enctype="multipart/form-data" method="post">
                         <div class="modal-body">
                             <input type="file" class="m-md-2" name="pig_photo" accept="image/jpeg, image/jpg" value="" required />
-                            <input type="text" class="m-md-2" name="photo_description" value="" required />
+                            <input type="text" class="m-md-2" maxlength="30" name="photo_description" value="" required />
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>

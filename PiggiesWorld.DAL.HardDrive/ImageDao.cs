@@ -15,7 +15,7 @@ namespace PiggiesWorld.DAL.HardDrive
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
 
-            var newName = Path.GetDirectoryName(imageName) + "\\" + guid.ToString() + Path.GetFileName(imageName);
+            var newName = Path.GetDirectoryName(imageName) + "\\" + guid.ToString() + Path.GetExtension(imageName);
 
             using (FileStream outputFileStream = new FileStream(newName, FileMode.Create))
             {

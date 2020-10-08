@@ -19,6 +19,18 @@ namespace PiggiesWorld.BLL.Logic
             _rolesDao = rolesDao ?? throw new ArgumentNullException(nameof(rolesDao));
         }
 
+        public bool DeleteUserById(int id)
+        {
+            try
+            {
+                return _usersDao.DeleteUserById(id);
+            }
+            catch (SqlException e)
+            {
+                throw new DALException(DALType.SQL, e.Message, e);
+            }
+        }
+
         public User GetUserById(int id)
         {
             try

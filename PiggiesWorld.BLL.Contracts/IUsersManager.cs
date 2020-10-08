@@ -14,5 +14,7 @@ namespace PiggiesWorld.BLL.Contracts
         IEnumerable<Role> GetUsersRolesByUserID(int userID);
 
         IEnumerable<Role> GetUsersRolesByLogin(string login);
+
+        bool DeleteUserById(int id);
     }
 }

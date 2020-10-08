@@ -22,8 +22,8 @@ namespace PiggiesWorld.DAL.Sql
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 var query =
-                    "SELECT * from user" +
-                    $" WHERE user.id = {id}";
+                    "SELECT * from [user]" +
+                    $" WHERE [user].id = {id}";
 
                 var command = new SqlCommand(query, connection);
 
@@ -40,7 +40,7 @@ namespace PiggiesWorld.DAL.Sql
                     };
                 }
 
-                throw new InvalidOperationException($"Cannot find user with ID = {id}");
+                return null;
             }
         }
 
@@ -175,6 +175,27 @@ namespace PiggiesWorld.DAL.Sql
 
                 return userIdToUser.Values;
             }
+        }
+
+        public bool DeleteUserById(int id)
+        {
+            if (GetUserById(id) == null)
+                return false;
+
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var command = connection.CreateCommand();
+                command.CommandType = System.Data.CommandType.StoredProcedure;
+                command.CommandText = "dbo.gsp_Delete_User";
+
+                command.Parameters.Add(new SqlParameter("user_id", id));
+
+                connection.Open();
+
+                command.ExecuteScalar();
+            }
+
+            return true;
         }
     }
 }

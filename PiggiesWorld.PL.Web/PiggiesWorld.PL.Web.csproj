@@ -169,9 +169,10 @@
     <Content Include="Pages\Submit.cshtml" />
     <Content Include="Pages\VideoPages\DeleteVideoTemp.cshtml" />
     <Content Include="Pages\AdministrationPages\Administration.cshtml" />
-    <Content Include="Pages\AdministrationPages\ChangeUserRoles.cshtml" />
+    <Content Include="Pages\AdministrationPages\ChangeUserRolesTemp.cshtml" />
     <Content Include="Pages\AuthPages\LogInTemp.cshtml" />
     <Content Include="Pages\AuthPages\RegistrationTemp.cshtml" />
+    <Content Include="Pages\AdministrationPages\DeleteUserTemp.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
