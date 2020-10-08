@@ -15,7 +15,15 @@
         var photoId = int.Parse(Request["photoID"]);
         var photoManager = DependencesResolver.Resolver.Get<IPhotoManager>();
 
-        photoManager.DeletePhotoById(photoId);
+        try
+        {
+            photoManager.DeletePhotoById(photoId);
+        }
+        catch (PiggiesWorld.Common.Exceptions.DALException e)
+        {
+            Logger.Log.Error(e.ToString());
+            Response.Redirect("~/Pages/ErrorPage.html");
+        }
     }
 
     Response.Redirect("~/Pages/PhotoPages/Photo.cshtml");

@@ -15,14 +15,21 @@
         var rolesManager = DependencesResolver.Resolver.Get<IRolesManager>();
         var usersManager = DependencesResolver.Resolver.Get<IUsersManager>();
 
-        var allRoles = rolesManager.GetAllRoles();
-        var roles = allRoles.Where(role => Request[role.Title] != null).ToArray();
-
-        var user = usersManager.GetUserByLogin(User.Identity.Name);
-
         var userId = int.Parse(Request["id"]);
 
-        rolesManager.UpdateRolesForUser(roles, userId);
+        try
+        {
+            var allRoles = rolesManager.GetAllRoles();
+            var roles = allRoles.Where(role => Request[role.Title] != null).ToArray();
+
+            var user = usersManager.GetUserByLogin(User.Identity.Name);
+            rolesManager.UpdateRolesForUser(roles, userId);
+        }
+        catch (PiggiesWorld.Common.Exceptions.DALException e)
+        {
+            Logger.Log.Error(e.ToString());
+            Response.Redirect("~/Pages/ErrorPage.html");
+        }
     }
 
     Response.Redirect("~/Pages/AdministrationPages/Administration.cshtml");

@@ -15,8 +15,19 @@
     var usersManager = DependencesResolver.Resolver.Get<IUsersManager>();
     var rolesManager = DependencesResolver.Resolver.Get<IRolesManager>();
 
-    var users = usersManager.GetUsersWithRoles(usersCount);
-    var roles = rolesManager.GetAllRoles();
+    IEnumerable<PiggiesWorld.Common.Entities.User> users = null;
+    IEnumerable<PiggiesWorld.Common.Entities.Role> roles = null;
+
+    try
+    {
+        users = usersManager.GetUsersWithRoles(usersCount);
+        roles = rolesManager.GetAllRoles();
+    }
+    catch (PiggiesWorld.Common.Exceptions.DALException e)
+    {
+        Logger.Log.Error(e.ToString());
+        Response.Redirect("~/Pages/ErrorPage.html");
+    }
 }
 
 <div class="container">

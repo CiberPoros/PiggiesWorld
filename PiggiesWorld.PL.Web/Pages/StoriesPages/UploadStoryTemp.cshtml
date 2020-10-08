@@ -36,9 +36,19 @@
         var usersManager = DependencesResolver.Resolver.Get<IUsersManager>();
         var storiesManager = DependencesResolver.Resolver.Get<IStoriesManager>();
 
-        story.UserID = usersManager.GetUserByLogin(User.Identity.Name).ID;
-
-        storiesManager.AddStory(Request.Files["preview_photo"].InputStream, Request.Files["inner_photo1"].InputStream, Request.Files["inner_photo2"].InputStream, story);
+        try
+        {
+            story.UserID = usersManager.GetUserByLogin(User.Identity.Name).ID;
+            storiesManager.AddStory(
+                Request.Files["preview_photo"].InputStream, 
+                Request.Files["inner_photo1"].InputStream, 
+                Request.Files["inner_photo2"].InputStream, story);
+        }
+        catch (PiggiesWorld.Common.Exceptions.DALException e)
+        {
+            Logger.Log.Error(e.ToString());
+            Response.Redirect("~/Pages/ErrorPage.html");
+        }
 
         string Normalize(string str) => str.Trim() == string.Empty ? null : str.Trim();
     }

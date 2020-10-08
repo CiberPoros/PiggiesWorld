@@ -15,7 +15,15 @@
         var videoId = int.Parse(Request["videoId"]);
         var videoManager = DependencesResolver.Resolver.Get<IVideoManager>();
 
-        videoManager.DeleteVideoById(videoId);
+        try
+        {
+            videoManager.DeleteVideoById(videoId);
+        }
+        catch (PiggiesWorld.Common.Exceptions.DALException e)
+        {
+            Logger.Log.Error(e.ToString());
+            Response.Redirect("~/Pages/ErrorPage.html");
+        }
     }
 
     Response.Redirect("~/Pages/VideoPages/Video.cshtml");

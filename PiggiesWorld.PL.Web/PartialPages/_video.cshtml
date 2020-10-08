@@ -4,14 +4,26 @@
 
 @{
     Layout = null;
-    var vedeoManager = DependencesResolver.Resolver.Get<IVideoManager>();
+    var videoManager = DependencesResolver.Resolver.Get<IVideoManager>();
 
     var videoCount = (int)Page.VideoCount;
+
+    IEnumerable<(PiggiesWorld.Common.Entities.Video video, string uploaderName)> videoWithUploaders = null;
+
+    try
+    {
+        videoWithUploaders = videoManager.GetVideoWithUploaders(videoCount, !(User.IsInRole("admin") || User.IsInRole("moderator")));
+    }
+    catch (PiggiesWorld.Common.Exceptions.DALException e)
+    {
+        Logger.Log.Error(e.ToString());
+        Response.Redirect("~/Pages/ErrorPage.html");
+    }
 }
 
 <div class="video-container">
     <div class="row">
-        @foreach (var item in vedeoManager.GetVideoWithUploaders(videoCount, !(User.IsInRole("admin") || User.IsInRole("moderator"))))
+        @foreach (var item in videoWithUploaders)
         {
             <div class="card m-md-3 p-md-2 thumb text-center">
                 <h6>@item.video.Description</h6>

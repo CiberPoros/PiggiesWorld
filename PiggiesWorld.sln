@@ -35,6 +35,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HardDrive", "HardDrive", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiggiesWorld.DAL.HardDrive", "PiggiesWorld.DAL.HardDrive\PiggiesWorld.DAL.HardDrive.csproj", "{8D3DF114-9596-4C8B-B728-F86EFC73BE2D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PiggiesWorld.Common.Exceptions", "PiggiesWorld.Common.Exceptions\PiggiesWorld.Common.Exceptions.csproj", "{94B546A0-F9B5-48D3-AD7C-C8E2690650C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -73,6 +75,10 @@ Global
 		{8D3DF114-9596-4C8B-B728-F86EFC73BE2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8D3DF114-9596-4C8B-B728-F86EFC73BE2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8D3DF114-9596-4C8B-B728-F86EFC73BE2D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94B546A0-F9B5-48D3-AD7C-C8E2690650C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94B546A0-F9B5-48D3-AD7C-C8E2690650C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94B546A0-F9B5-48D3-AD7C-C8E2690650C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94B546A0-F9B5-48D3-AD7C-C8E2690650C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +96,7 @@ Global
 		{333AE25F-CAF1-42CE-93F8-4D5F039FA620} = {A7CF39D8-7EBA-4E34-BA7E-F6D0D4339E4D}
 		{26B8A69E-C773-4E15-8645-5C93838462C2} = {347D03BC-84F2-4C1B-99A1-4305FFB661CF}
 		{8D3DF114-9596-4C8B-B728-F86EFC73BE2D} = {26B8A69E-C773-4E15-8645-5C93838462C2}
+		{94B546A0-F9B5-48D3-AD7C-C8E2690650C5} = {D21F6AB6-E2CC-4F27-9FCB-A8DD22D1491E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2A61BD65-D7D7-429C-9919-9E798DDFF9CC}

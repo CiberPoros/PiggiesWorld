@@ -39,7 +39,15 @@
             Response.Redirect("~/index.cshtml");
         }
 
-        submitEntityManager?.Submit(id);
+        try
+        {
+            submitEntityManager?.Submit(id);
+        }
+        catch(PiggiesWorld.Common.Exceptions.DALException e)
+        {
+            Logger.Log.Error(e.ToString());
+            Response.Redirect("~/Pages/ErrorPage.html");
+        }
 
         Response.Redirect(redirectString);
     }

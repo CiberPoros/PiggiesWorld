@@ -18,15 +18,23 @@
             Response.Redirect("~/Pages/AuthPages/LogIn.cshtml?incorrect=true");
         }
 
-        if (authManager.IsCorrectPassword(login, password))
+        try
         {
-            FormsAuthentication.SetAuthCookie(login, createPersistentCookie: true);
-            Logger.Log.Info($"user is logged in; user name {login}");
-            Response.Redirect("~");
+            if (authManager.IsCorrectPassword(login, password))
+            {
+                FormsAuthentication.SetAuthCookie(login, createPersistentCookie: true);
+                Logger.Log.Info($"user is logged in; user name {login}");
+                Response.Redirect("~");
+            }
+            else
+            {
+                Response.Redirect("~/Pages/AuthPages/LogIn.cshtml?incorrect=true");
+            }
         }
-        else
+        catch (PiggiesWorld.Common.Exceptions.DALException e)
         {
-            Response.Redirect("~/Pages/AuthPages/LogIn.cshtml?incorrect=true");
+            Logger.Log.Error(e.ToString());
+            Response.Redirect("~/Pages/ErrorPage.html");
         }
 
         Response.Redirect("~/Pages/AuthPages/LogIn.cshtml");

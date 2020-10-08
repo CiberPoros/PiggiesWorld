@@ -14,7 +14,16 @@
 
     var storiesManager = DependencesResolver.Resolver.Get<IStoriesManager>();
 
-    var story = storiesManager.GetStoryById(storyID);
+    PiggiesWorld.Common.Entities.Story story = null;
+    try
+    {
+        story = storiesManager.GetStoryById(storyID);
+    }
+    catch (PiggiesWorld.Common.Exceptions.DALException e)
+    {
+        Logger.Log.Error(e.ToString());
+        Response.Redirect("~/Pages/ErrorPage.html");
+    }
 }
 
 <div class="container center-block text-center">

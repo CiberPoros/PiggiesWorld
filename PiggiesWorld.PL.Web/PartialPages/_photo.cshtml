@@ -7,11 +7,22 @@
     IPhotoManager photoManager = DependencesResolver.Resolver.Get<IPhotoManager>();
 
     var photoCount = (int)Page.PhotoCount;
+    IEnumerable<(PiggiesWorld.Common.Entities.Photo photo, string uploaderName)> photoWithUploaders = null;
+
+    try
+    {
+        photoWithUploaders = photoManager.GetPhotoWithUploaders(photoCount, !(User.IsInRole("admin") || User.IsInRole("moderator")));
+    }
+    catch (PiggiesWorld.Common.Exceptions.DALException e)
+    {
+        Logger.Log.Error(e.ToString());
+        Response.Redirect("~/Pages/ErrorPage.html");
+    }
 }
 
 <div class="photo-container">
     <div class="row">
-        @foreach (var item in photoManager.GetPhotoWithUploaders(photoCount, !(User.IsInRole("admin") || User.IsInRole("moderator"))))
+        @foreach (var item in photoWithUploaders)
         {
             <div class="col-md-3 col-sm-4 col-xs-6 thumb text-center" title="@item.photo.Description">
                 <a data-fancybox="gallery" href="~/Images/Photo/@(item.photo.Path)" data-caption="Автор: @item.uploaderName">

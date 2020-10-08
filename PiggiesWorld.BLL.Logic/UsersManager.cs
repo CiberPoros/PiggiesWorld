@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using PiggiesWorld.BLL.Contracts;
 using PiggiesWorld.Common.Entities;
+using PiggiesWorld.Common.Exceptions;
 using PiggiesWorld.DAL.Contracts;
 
 namespace PiggiesWorld.BLL.Logic
@@ -17,17 +19,65 @@ namespace PiggiesWorld.BLL.Logic
             _rolesDao = rolesDao ?? throw new ArgumentNullException(nameof(rolesDao));
         }
 
-        public User GetUserById(int id) => _usersDao.GetUserById(id);
-        public User GetUserByLogin(string login) => _usersDao.GetUserByLogin(login);
+        public User GetUserById(int id)
+        {
+            try
+            {
+                return _usersDao.GetUserById(id);
+            }
+            catch (SqlException e)
+            {
+                throw new DALException(DALType.SQL, e.Message, e);
+            }
+        }
+
+        public User GetUserByLogin(string login)
+        {
+            try
+            {
+                return _usersDao.GetUserByLogin(login);
+            }
+            catch (SqlException e)
+            {
+                throw new DALException(DALType.SQL, e.Message, e);
+            }
+        }
 
         public IEnumerable<Role> GetUsersRolesByLogin(string login)
         {
-            var user = _usersDao.GetUserByLogin(login);
-            return _rolesDao.GetRolesByUserId(user.ID);
+            try
+            {
+                var user = _usersDao.GetUserByLogin(login);
+                return _rolesDao.GetRolesByUserId(user.ID);
+            }
+            catch (SqlException e)
+            {
+                throw new DALException(DALType.SQL, e.Message, e);
+            }
         }
 
-        public IEnumerable<Role> GetUsersRolesByUserID(int userID) => _rolesDao.GetRolesByUserId(userID);
+        public IEnumerable<Role> GetUsersRolesByUserID(int userID)
+        {
+            try
+            {
+                return _rolesDao.GetRolesByUserId(userID);
+            }
+            catch (SqlException e)
+            {
+                throw new DALException(DALType.SQL, e.Message, e);
+            }
+        }
 
-        public IEnumerable<User> GetUsersWithRoles(int count) => _usersDao.GetUsersWithRoles(count);
+        public IEnumerable<User> GetUsersWithRoles(int count)
+        {
+            try
+            {
+                return _usersDao.GetUsersWithRoles(count);
+            }
+            catch (SqlException e)
+            {
+                throw new DALException(DALType.SQL, e.Message, e);
+            }
+        }
     }
 }

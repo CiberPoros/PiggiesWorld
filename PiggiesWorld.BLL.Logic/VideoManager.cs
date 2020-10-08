@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using PiggiesWorld.BLL.Contracts;
 using PiggiesWorld.Common.Entities;
+using PiggiesWorld.Common.Exceptions;
 using PiggiesWorld.DAL.Contracts;
 
 namespace PiggiesWorld.BLL.Logic
@@ -15,10 +17,52 @@ namespace PiggiesWorld.BLL.Logic
             _videoDao = videoDao ?? throw new ArgumentNullException(nameof(videoDao));
         }
 
-        public void AddVideo(Video video) => _videoDao.AddVideo(video);
-        public void DeleteVideoById(int id) => _videoDao.DeleteVideoById(id);
-        public IEnumerable<(Video video, string uploaderName)> GetVideoWithUploaders(int count, bool submitedOnly) => 
-            _videoDao.GetVideoWithUploaders(count, submitedOnly);
-        public void Submit(int id) => _videoDao.Submit(id);
+        public void AddVideo(Video video)
+        {
+            try
+            {
+                _videoDao.AddVideo(video);
+            }
+            catch (SqlException e)
+            {
+                throw new DALException(DALType.SQL, e.Message, e);
+            }
+        }
+
+        public void DeleteVideoById(int id)
+        {
+            try
+            {
+                _videoDao.DeleteVideoById(id);
+            }
+            catch (SqlException e)
+            {
+                throw new DALException(DALType.SQL, e.Message, e);
+            }
+        }
+
+        public IEnumerable<(Video video, string uploaderName)> GetVideoWithUploaders(int count, bool submitedOnly)
+        {
+            try
+            {
+                return _videoDao.GetVideoWithUploaders(count, submitedOnly);
+            }
+            catch (SqlException e)
+            {
+                throw new DALException(DALType.SQL, e.Message, e);
+            }
+        }
+
+        public void Submit(int id)
+        {
+            try
+            {
+                _videoDao.Submit(id);
+            }
+            catch (SqlException e)
+            {
+                throw new DALException(DALType.SQL, e.Message, e);
+            }
+        }
     }
 }

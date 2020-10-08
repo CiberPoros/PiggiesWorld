@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Security.Cryptography;
 using System.Text;
 using PiggiesWorld.BLL.Contracts;
 using PiggiesWorld.Common.Entities;
+using PiggiesWorld.Common.Exceptions;
 using PiggiesWorld.DAL.Contracts;
 
 namespace PiggiesWorld.BLL.Logic
@@ -22,12 +24,28 @@ namespace PiggiesWorld.BLL.Logic
             if (user is null)
                 return false;
 
-            string pswdHash = _usersDao.GetPasswordHashById(user.ID);
-
-            return ComputeHash(password) == pswdHash;
+            try
+            {
+                string pswdHash = _usersDao.GetPasswordHashById(user.ID);
+                return ComputeHash(password) == pswdHash;
+            }
+            catch (SqlException e)
+            {
+                throw new DALException(DALType.SQL, e.Message, e);
+            }
         }
 
-        public bool RegisterUser(User user, string password) => _usersDao.RegisterUser(user, ComputeHash(password));
+        public bool RegisterUser(User user, string password)
+        {
+            try
+            {
+                return _usersDao.RegisterUser(user, ComputeHash(password));
+            }
+            catch (SqlException e)
+            {
+                throw new DALException(DALType.SQL, e.Message, e);
+            }
+        }
 
         private static string ComputeHash(string password)
         {

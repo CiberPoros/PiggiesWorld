@@ -15,7 +15,15 @@
         var storyId = int.Parse(Request["storyId"]);
         var storiesManager = DependencesResolver.Resolver.Get<IStoriesManager>();
 
-        storiesManager.DeleteStoryById(storyId);
+        try
+        {
+            storiesManager.DeleteStoryById(storyId);
+        }
+        catch (PiggiesWorld.Common.Exceptions.DALException e)
+        {
+            Logger.Log.Error(e.ToString());
+            Response.Redirect("~/Pages/ErrorPage.html");
+        }
     }
 
     Response.Redirect("~/Pages/StoriesPages/PigStories.cshtml");

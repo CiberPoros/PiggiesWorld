@@ -22,7 +22,15 @@
         var photoManager = DependencesResolver.Resolver.Get<IPhotoManager>();
         var usersManager = DependencesResolver.Resolver.Get<IUsersManager>();
 
-        photoManager.AddPhoto(stream, $"{path}\\{Path.GetFileName(file.FileName)}", description, usersManager.GetUserByLogin(User.Identity.Name));
+        try
+        {
+            photoManager.AddPhoto(stream, $"{path}\\{Path.GetFileName(file.FileName)}", description, usersManager.GetUserByLogin(User.Identity.Name));
+        }
+        catch (PiggiesWorld.Common.Exceptions.DALException e)
+        {
+            Logger.Log.Error(e.ToString());
+            Response.Redirect("~/Pages/ErrorPage.html");
+        }
     }
 
     Response.Redirect("~/Pages/PhotoPages/Photo.cshtml");

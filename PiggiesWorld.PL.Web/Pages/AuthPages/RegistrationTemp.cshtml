@@ -21,14 +21,22 @@
                 Response.Redirect("~/Pages/AuthPages/Registration.cshtml?incorrect=true");
             }
 
-            if (authManager.RegisterUser(new User { LoginName = userName, BirthDay = dateOfBirth }, password))
+            try
             {
-                FormsAuthentication.SetAuthCookie(userName, createPersistentCookie: true);
-                Response.Redirect("~");
+                if (authManager.RegisterUser(new User { LoginName = userName, BirthDay = dateOfBirth }, password))
+                {
+                    FormsAuthentication.SetAuthCookie(userName, createPersistentCookie: true);
+                    Response.Redirect("~");
+                }
+                else
+                {
+                    Response.Redirect("~/Pages/AuthPages/Registration.cshtml?incorrect=true");
+                }
             }
-            else
+            catch (PiggiesWorld.Common.Exceptions.DALException e)
             {
-                Response.Redirect("~/Pages/AuthPages/Registration.cshtml?incorrect=true");
+                Logger.Log.Error(e.ToString());
+                Response.Redirect("~/Pages/ErrorPage.html");
             }
         }
         else

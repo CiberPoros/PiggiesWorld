@@ -19,7 +19,19 @@
         var usersManager = DependencesResolver.Resolver.Get<IUsersManager>();
         var videoManager = DependencesResolver.Resolver.Get<IVideoManager>();
 
-        videoManager.AddVideo(new Video { Url = url, Description = description, UserID = usersManager.GetUserByLogin(User.Identity.Name).ID, UploadDate = DateTime.Now});
+        try
+        {
+            videoManager.AddVideo(new Video { 
+                Url = url, 
+                Description = description, 
+                UserID = usersManager.GetUserByLogin(User.Identity.Name).ID, 
+                UploadDate = DateTime.Now });
+        }
+        catch (PiggiesWorld.Common.Exceptions.DALException e)
+        {
+            Logger.Log.Error(e.ToString());
+            Response.Redirect("~/Pages/ErrorPage.html");
+        }
     }
 
     Response.Redirect("~/Pages/VideoPages/Video.cshtml");

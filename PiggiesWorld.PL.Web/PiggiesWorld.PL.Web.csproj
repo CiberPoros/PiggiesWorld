@@ -104,6 +104,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\common.css" />
+    <Content Include="Content\error-page.css" />
     <Content Include="Content\fancybox-try.css" />
     <Content Include="Content\fancybox\blank.gif" />
     <Content Include="Content\fancybox\fancybox_buttons.png" />
@@ -124,6 +125,7 @@
     <Content Include="Images\Photo\pig.jpg" />
     <Content Include="Images\piggs_background.jpg" />
     <Content Include="JS\validation.js" />
+    <Content Include="Pages\ErrorPage.html" />
     <Content Include="Scripts\bootstrap.bundle.js" />
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />

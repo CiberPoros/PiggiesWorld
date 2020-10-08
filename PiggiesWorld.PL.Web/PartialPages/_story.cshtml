@@ -7,6 +7,18 @@
     var storiesManager = DependencesResolver.Resolver.Get<IStoriesManager>();
 
     var storyCount = (int)Page.StoryCount;
+
+    IEnumerable<(PiggiesWorld.Common.Entities.Story story, string uploaderName)> storiesWithUploaders = null;
+
+    try
+    {
+        storiesWithUploaders = storiesManager.GetStoriesWithUploaders(storyCount, !(User.IsInRole("admin") || User.IsInRole("moderator")));
+    }
+    catch (PiggiesWorld.Common.Exceptions.DALException e)
+    {
+        Logger.Log.Error(e.ToString());
+        Response.Redirect("~/Pages/ErrorPage.html");
+    }
 }
 
 <div class="stories-container">
