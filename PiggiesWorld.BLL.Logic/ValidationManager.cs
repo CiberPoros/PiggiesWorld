@@ -1,8 +1,9 @@
-﻿using PiggiesWorld.BLL.Contracts;
+﻿using System.Text.RegularExpressions;
+using PiggiesWorld.BLL.Contracts;
 
 namespace PiggiesWorld.BLL.Logic
 {
-    public class AuthValidationManager : IAuthValudationManager
+    public class ValidationManager : IValudationManager
     {
         public bool IsValidLogin(string login) => IsValidString(login);
         public bool IsValidPassword(string password) => IsValidString(password);
@@ -42,6 +43,11 @@ namespace PiggiesWorld.BLL.Logic
                 return true;
 
             return false;
+        }
+
+        public bool IsValidPhoneNumber(string phone)
+        {
+            return Regex.Match(phone, @"^(\+[0-9]{9})$").Success;
         }
     }
 }

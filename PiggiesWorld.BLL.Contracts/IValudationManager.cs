@@ -1,8 +1,10 @@
 ﻿namespace PiggiesWorld.BLL.Contracts
 {
-    public interface IAuthValudationManager
+    public interface IValudationManager
     {
         bool IsValidLogin(string login);
         bool IsValidPassword(string login);
+
+        bool IsValidPhoneNumber(string phone);
     }
 }

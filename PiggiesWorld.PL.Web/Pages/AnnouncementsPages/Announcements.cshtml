@@ -52,8 +52,9 @@
                             <label for="preview_photo" class="btn-link">загрузите фото для заголовка*</label>
                             <input id="preview_photo" type="file" accept="image/jpeg, image/jpg" name="preview_photo" value="" required />
                         </div>
-                        <textarea class="non-resize" name="announcement_description" placeholder="описание*" rows="12" cols="50" maxlength="500"></textarea>
-                        <input type="tel" name="phone" placeholder="контактный номер" maxlength="20" size="48" value="" />
+                        <textarea class="non-resize" name="announcement_description" placeholder="описание*" rows="12" cols="50" maxlength="500" required ></textarea>
+                        <label for="phone-number">Телефонный номер</label>
+                        <input id="phone-number" type="tel" name="phone" placeholder="8X XX XX XX XXX" pattern="[7-9]{1}[0-9]{10}" size="48" value="" required />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
