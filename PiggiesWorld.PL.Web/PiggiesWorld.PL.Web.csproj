@@ -173,6 +173,11 @@
     <Content Include="Pages\AuthPages\LogInTemp.cshtml" />
     <Content Include="Pages\AuthPages\RegistrationTemp.cshtml" />
     <Content Include="Pages\AdministrationPages\DeleteUserTemp.cshtml" />
+    <Content Include="Pages\AnnouncementsPages\Announcements.cshtml" />
+    <Content Include="Pages\AnnouncementsPages\DeleteAnnouncementTemp.cshtml" />
+    <Content Include="Pages\AnnouncementsPages\UploadAnnouncementTemp.cshtml" />
+    <Content Include="PartialPages\_announcement.cshtml" />
+    <Content Include="Pages\AnnouncementsPages\FullAnnouncement.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />

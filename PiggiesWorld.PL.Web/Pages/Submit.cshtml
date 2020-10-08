@@ -34,6 +34,12 @@
             id = int.Parse(Request["storyID"]);
             redirectString = "~/Pages/StoriesPages/PigStories.cshtml";
         }
+        else if (!string.IsNullOrEmpty(Request["announcementID"]))
+        {
+            submitEntityManager = DependencesResolver.Resolver.Get<IAnnouncementManager>();
+            id = int.Parse(Request["announcementID"]);
+            redirectString = "~/Pages/AnnouncementsPages/Announcements.cshtml";
+        }
         else
         {
             Response.Redirect("~/index.cshtml");

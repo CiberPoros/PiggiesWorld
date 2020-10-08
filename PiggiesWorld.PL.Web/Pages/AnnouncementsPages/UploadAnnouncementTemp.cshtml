@@ -1,0 +1,59 @@
+﻿@using PiggiesWorld.PL.Web.Models;
+@using PiggiesWorld.BLL.Contracts;
+@using Ninject;
+
+@{
+    Layout = null;
+
+    if (!User.IsInRole("admin") && !User.IsInRole("moderator"))
+    {
+        Response.Redirect("~/Pages/AnnouncementsPages/Announcements.cshtml");
+    }
+
+    if (IsPost)
+    {
+        var announcementManager = DependencesResolver.Resolver.Get<IAnnouncementManager>();
+        var usersManager = DependencesResolver.Resolver.Get<IUsersManager>();
+
+        var title = Request["announcement_title"];
+        var photoStream = Request.Files["preview_photo"];
+        var description = Request["announcement_description"];
+        var phone = Request["phone"];
+        var uploadDate = DateTime.Now;
+
+        int uploaderId = -1;
+        try
+        {
+            uploaderId = usersManager.GetUserByLogin(User.Identity.Name).ID;
+        }
+        catch (PiggiesWorld.Common.Exceptions.DALException e)
+        {
+            Logger.Log.Error(e.ToString());
+            Response.Redirect("~/Pages/ErrorPage.html");
+        }
+
+        var path = Server.MapPath("~/Images/Photo");
+
+        var announcement = new PiggiesWorld.Common.Entities.Announcement()
+        {
+            Title = title,
+            PreviewPhotoName = $"{path}\\{Path.GetFileName(photoStream.FileName)}",
+            Description = description,
+            PhoneNumber = phone,
+            UploadDate = uploadDate,
+            UserID = uploaderId
+        };
+
+        try
+        {
+            announcementManager.AddAnnouncement(photoStream.InputStream, announcement);
+        }
+        catch (PiggiesWorld.Common.Exceptions.DALException e)
+        {
+            Logger.Log.Error(e.ToString());
+            Response.Redirect("~/Pages/ErrorPage.html");
+        }
+    }
+
+    Response.Redirect("~/Pages/AnnouncementsPages/Announcements.cshtml");
+}

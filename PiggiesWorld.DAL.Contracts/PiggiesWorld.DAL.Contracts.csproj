@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IAnnouncementDao.cs" />
     <Compile Include="IImageDao.cs" />
     <Compile Include="IPhotoDao.cs" />
     <Compile Include="IRolesDao.cs" />

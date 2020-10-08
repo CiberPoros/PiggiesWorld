@@ -1,0 +1,49 @@
+﻿@{
+    Layout = "/Layouts/_externalLayout.cshtml";
+
+    int announcementCount = Request["announcementCount"] == null ? 20 : int.Parse(Request["announcementCount"]);
+
+    Page.AnnouncementCount = announcementCount;
+}
+
+<div class="container center-block text-center">
+
+    <div class="d-flex justify-content-around">
+        @RenderPage("~/PartialPages/_announcement.cshtml")
+    </div>
+
+    <div>
+        <a class="btn-secondary" href="~/Pages/AnnouncementsPages/Announcements.cshtml?announcementCount=@(announcementCount + 20)">Показать еще</a>
+        <div class="w-100"></div>
+        @if (User.Identity.IsAuthenticated)
+        {
+            <button type="button" class="btn-secondary" data-toggle="modal" data-target="#addAnnouncementModal">Добавить объявление</button>
+        }
+    </div>
+    <div class="modal fade" id="addAnnouncementModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Заполните поля</h4>
+                </div>
+                <form action="~/Pages/AnnouncementsPages/UploadAnnouncementTemp.cshtml" enctype="multipart/form-data" method="post">
+                    <div class="modal-body">
+                        <input type="text" name="announcement_title" placeholder="введите заголовок*" maxlength="30" size="48" value="" required />
+                        <div class="mb-md-1">
+                            <label for="preview_photo" class="btn-link">загрузите фото для заголовка*</label>
+                            <input id="preview_photo" type="file" accept="image/jpeg, image/jpg" name="preview_photo" value="" required />
+                        </div>
+                        <textarea class="non-resize" name="announcement_description" placeholder="описание*" rows="12" cols="50" maxlength="500"></textarea>
+                        <input type="tel" name="phone" placeholder="контактный номер" maxlength="20" size="48" value="" />               
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <input type="submit" class="btn btn-primary" name="add_announcement" value="Добавить объявление" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+

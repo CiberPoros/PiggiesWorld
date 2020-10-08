@@ -1,0 +1,50 @@
+﻿@using PiggiesWorld.BLL.Contracts;
+@using PiggiesWorld.PL.Web.Models;
+@using Ninject;
+
+@{
+    Layout = null;
+    var announcementManager = DependencesResolver.Resolver.Get<IAnnouncementManager>();
+
+    var announcementCount = (int)Page.AnnouncementCount;
+
+    IEnumerable<(PiggiesWorld.Common.Entities.Announcement announcement, string uploaderName)> announcementsWithUploaders = null;
+
+    try
+    {
+        announcementsWithUploaders = announcementManager.GetAnnouncementsWithUploaders(announcementCount, !(User.IsInRole("admin") || User.IsInRole("moderator")));
+    }
+    catch (PiggiesWorld.Common.Exceptions.DALException e)
+    {
+        Logger.Log.Error(e.ToString());
+        Response.Redirect("~/Pages/ErrorPage.html");
+    }
+}
+
+<div class="stories-container">
+    <div class="row">
+        @foreach (var item in announcementsWithUploaders)
+        {
+            <div class="card m-md-3 p-md-2" style="width: 250px">
+                <h3 class="card-title">@item.announcement.Title</h3>
+                <a href="~/Pages/AnnouncementsPages/FullAnnouncement.cshtml?announcementID=@(item.announcement.ID)"><img class="card-img-top img-thumbnail" src="~/Images/Photo/@(item.announcement.PreviewPhotoName)" alt="@(item.announcement.Description)" width="300" /></a>
+                <h6 class="card-title">Автор: @(item.uploaderName)</h6>
+
+                @if (User.IsInRole("admin") || User.IsInRole("moderator"))
+                {
+                    <div class="d-flex justify-content-around">
+                        <form action="~/Pages/AnnouncementsPages/DeleteAnnouncementTemp.cshtml?announcementID=@(item.announcement.ID)" method="post">
+                            <input type="submit" class="btn btn-danger m-md-2" name="delete" value="delete" />
+                        </form>
+                        @if (!item.announcement.IsSubmited)
+                        {
+                            <form action="~/Pages/Submit.cshtml?announcementID=@(item.announcement.ID)" method="post">
+                                <input type="submit" class="btn btn-success m-md-2" name="submit_announcement" value="submit" />
+                            </form>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>

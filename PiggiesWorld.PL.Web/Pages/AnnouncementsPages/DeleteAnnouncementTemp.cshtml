@@ -1,0 +1,31 @@
+﻿@using PiggiesWorld.PL.Web.Models;
+@using PiggiesWorld.BLL.Contracts;
+@using Ninject;
+
+@{
+    Layout = null;
+
+    if (!User.IsInRole("admin") && !User.IsInRole("moderator"))
+    {
+        Response.Redirect("~/Pages/AnnouncementsPages/Announcements.cshtml");
+    }
+
+    if (IsPost)
+    {
+        var announcementId = int.Parse(Request["announcementId"]);
+        var announcementsManager = DependencesResolver.Resolver.Get<IAnnouncementManager>();
+
+        try
+        {
+            announcementsManager.DeleteAnnouncementById(announcementId);
+        }
+        catch (PiggiesWorld.Common.Exceptions.DALException e)
+        {
+            Logger.Log.Error(e.ToString());
+            Response.Redirect("~/Pages/ErrorPage.html");
+        }
+    }
+
+    Response.Redirect("~/Pages/AnnouncementsPages/Announcements.cshtml");
+}
+

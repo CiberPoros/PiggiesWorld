@@ -23,7 +23,7 @@
 
 <div class="stories-container">
     <div class="row">
-        @foreach (var item in storiesManager.GetStoriesWithUploaders(storyCount, !(User.IsInRole("admin") || User.IsInRole("moderator"))))
+        @foreach (var item in storiesWithUploaders)
         {
             <div class="card m-md-3 p-md-2" style="width: 250px">
                 <h3 class="card-title">@item.story.Title</h3>

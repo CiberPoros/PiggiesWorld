@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\EntityDao.cs" />
+    <Compile Include="AnnouncementDao.cs" />
     <Compile Include="AssociationsManager.cs" />
     <Compile Include="PhotoDao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
