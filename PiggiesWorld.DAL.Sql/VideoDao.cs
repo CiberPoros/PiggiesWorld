@@ -44,6 +44,23 @@ namespace PiggiesWorld.DAL.Sql
             }
         }
 
+        public int GetCount(bool submitedOnly)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var query =
+                    $"SELECT COUNT(user_video.id) FROM user_video";
+
+                if (submitedOnly)
+                    query += " WHERE user_video.flag_submited = 1";
+
+                var command = new SqlCommand(query, connection);
+
+                connection.Open();
+                return (int)command.ExecuteScalar();
+            }
+        }
+
         public IEnumerable<(Video video, string uploaderName)> GetVideoWithUploaders(int count, bool submitedOnly)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))

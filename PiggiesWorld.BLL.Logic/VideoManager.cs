@@ -53,6 +53,18 @@ namespace PiggiesWorld.BLL.Logic
             }
         }
 
+        public int GetCount(bool submitedOnly)
+        {
+            try
+            {
+                return _videoDao.GetCount(submitedOnly);
+            }
+            catch (SqlException e)
+            {
+                throw new DALException(DALType.SQL, e.Message, e);
+            }
+        }
+
         public void Submit(int id)
         {
             try

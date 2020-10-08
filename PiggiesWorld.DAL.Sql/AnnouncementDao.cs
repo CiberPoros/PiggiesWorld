@@ -116,6 +116,23 @@ namespace PiggiesWorld.DAL.Sql
             }
         }
 
+        public int GetCount(bool submitedOnly)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var query =
+                    $"SELECT COUNT(user_announcement.id) FROM user_announcement";
+
+                if (submitedOnly)
+                    query += " WHERE user_announcement.flag_submited = 1";
+
+                var command = new SqlCommand(query, connection);
+
+                connection.Open();
+                return (int)command.ExecuteScalar();
+            }
+        }
+
         public void Submit(int id)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))

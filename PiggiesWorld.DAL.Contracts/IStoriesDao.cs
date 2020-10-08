@@ -3,7 +3,7 @@ using PiggiesWorld.Common.Entities;
 
 namespace PiggiesWorld.DAL.Contracts
 {
-    public interface IStoriesDao : ISubmitEntityDao
+    public interface IStoriesDao : ISubmitEntityDao, ICountOfElementDao
     {
         void AddStory(Story story);
 

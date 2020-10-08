@@ -4,7 +4,7 @@ using PiggiesWorld.Common.Entities;
 
 namespace PiggiesWorld.BLL.Contracts
 {
-    public interface IAnnouncementManager : ISubmitEntityManager
+    public interface IAnnouncementManager : ISubmitEntityManager, ICountOfElementsManager
     {
         IEnumerable<(Announcement announcement, string uploaderName)> GetAnnouncementsWithUploaders(int count, bool submitedOnly);
         void AddAnnouncement(Stream previewPhotoStream, Announcement announcement);

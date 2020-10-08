@@ -3,7 +3,7 @@ using PiggiesWorld.Common.Entities;
 
 namespace PiggiesWorld.DAL.Contracts
 {
-    public interface IAnnouncementDao : ISubmitEntityDao
+    public interface IAnnouncementDao : ISubmitEntityDao, ICountOfElementDao
     {
         void AddAnnouncement(Announcement announcement, int userID);
         IEnumerable<(Announcement announcement, string uploaderName)> GetAnnouncementsWithUploaders(int count, bool submitedOnly);

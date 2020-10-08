@@ -50,6 +50,18 @@ namespace PiggiesWorld.BLL.Logic
             }
         }
 
+        public int GetCount(bool submitedOnly)
+        {
+            try
+            {
+                return _photoDao.GetCount(submitedOnly);
+            }
+            catch (SqlException e)
+            {
+                throw new DALException(DALType.SQL, e.Message, e);
+            }
+        }
+
         public IEnumerable<(Photo photo, string uploaderName)> GetPhotoWithUploaders(int count, bool submitedOnly)
         {
             try

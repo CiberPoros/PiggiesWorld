@@ -1,9 +1,25 @@
-﻿@{
+﻿@using Ninject;
+@using PiggiesWorld.PL.Web.Models;
+@using PiggiesWorld.BLL.Contracts;
+
+@{
     Layout = "/Layouts/_externalLayout.cshtml";
 
     int announcementCount = Request["announcementCount"] == null ? 20 : int.Parse(Request["announcementCount"]);
 
     Page.AnnouncementCount = announcementCount;
+
+    var allCount = -1;
+
+    try
+    {
+        allCount = DependencesResolver.Resolver.Get<IAnnouncementManager>().GetCount(!(User.IsInRole("admin") || User.IsInRole("moderator")));
+    }
+    catch (PiggiesWorld.Common.Exceptions.DALException e)
+    {
+        Logger.Log.Error(e.ToString());
+        Response.Redirect("~/Pages/ErrorPage.html");
+    }
 }
 
 <div class="container center-block text-center">
@@ -13,8 +29,11 @@
     </div>
 
     <div>
-        <a class="btn-secondary" href="~/Pages/AnnouncementsPages/Announcements.cshtml?announcementCount=@(announcementCount + 20)">Показать еще</a>
-        <div class="w-100"></div>
+        @if (allCount > announcementCount)
+        {
+            <a class="btn-secondary" href="~/Pages/AnnouncementsPages/Announcements.cshtml?announcementCount=@(announcementCount + 20)">Показать еще</a>
+            <div class="w-100"></div>
+        }
         @if (User.Identity.IsAuthenticated)
         {
             <button type="button" class="btn-secondary" data-toggle="modal" data-target="#addAnnouncementModal">Добавить объявление</button>
@@ -34,7 +53,7 @@
                             <input id="preview_photo" type="file" accept="image/jpeg, image/jpg" name="preview_photo" value="" required />
                         </div>
                         <textarea class="non-resize" name="announcement_description" placeholder="описание*" rows="12" cols="50" maxlength="500"></textarea>
-                        <input type="tel" name="phone" placeholder="контактный номер" maxlength="20" size="48" value="" />               
+                        <input type="tel" name="phone" placeholder="контактный номер" maxlength="20" size="48" value="" />
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>

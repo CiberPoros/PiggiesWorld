@@ -1,9 +1,25 @@
-﻿@{
+﻿@using Ninject;
+@using PiggiesWorld.PL.Web.Models;
+@using PiggiesWorld.BLL.Contracts;
+
+@{
     Layout = "/Layouts/_externalLayout.cshtml";
 
     int storyCount = Request["storyCount"] == null ? 20 : int.Parse(Request["storyCount"]);
 
     Page.StoryCount = storyCount;
+
+    var allCount = -1;
+
+    try
+    {
+        allCount = DependencesResolver.Resolver.Get<IStoriesManager>().GetCount(!(User.IsInRole("admin") || User.IsInRole("moderator")));
+    }
+    catch (PiggiesWorld.Common.Exceptions.DALException e)
+    {
+        Logger.Log.Error(e.ToString());
+        Response.Redirect("~/Pages/ErrorPage.html");
+    }
 }
 
 <div class="container center-block text-center">
@@ -13,8 +29,11 @@
     </div>
 
     <div>
-        <a class="btn-secondary" href="~/Pages/StoriesPages/PigStories.cshtml?storyCount=@(storyCount + 20)">Показать еще</a>
-        <div class="w-100"></div>
+        @if (allCount > storyCount)
+        {
+            <a class="btn-secondary" href="~/Pages/StoriesPages/PigStories.cshtml?storyCount=@(storyCount + 20)">Показать еще</a>
+            <div class="w-100"></div>
+        }
         @if (User.Identity.IsAuthenticated)
         {
             <button type="button" class="btn-secondary" data-toggle="modal" data-target="#addStoryModal">Предложить пиго-историю</button>

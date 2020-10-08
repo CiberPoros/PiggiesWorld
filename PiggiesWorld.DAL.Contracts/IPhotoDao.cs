@@ -3,7 +3,7 @@ using PiggiesWorld.Common.Entities;
 
 namespace PiggiesWorld.DAL.Contracts
 {
-    public interface IPhotoDao : ISubmitEntityDao
+    public interface IPhotoDao : ISubmitEntityDao, ICountOfElementDao
     {
         IEnumerable<(Photo photo, string uploaderName)> GetPhotoWithUploaders(int count, bool submitedOnly);
         void DeletePhotoById(int id);

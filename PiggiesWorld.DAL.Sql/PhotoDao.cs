@@ -44,6 +44,23 @@ namespace PiggiesWorld.DAL.Sql
             }
         }
 
+        public int GetCount(bool submitedOnly)
+        {
+            using (SqlConnection connection = new SqlConnection(_connectionString))
+            {
+                var query =
+                    $"SELECT COUNT(user_photo.id) FROM user_photo";
+
+                if (submitedOnly)
+                    query += " WHERE user_photo.flag_submited = 1";
+
+                var command = new SqlCommand(query, connection);
+
+                connection.Open();
+                return (int)command.ExecuteScalar();
+            }
+        }
+
         public IEnumerable<(Photo photo, string uploaderName)> GetPhotoWithUploaders(int count, bool submitedOnly)
         {
             using (SqlConnection connection = new SqlConnection(_connectionString))

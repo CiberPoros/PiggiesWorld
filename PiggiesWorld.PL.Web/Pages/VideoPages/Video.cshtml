@@ -1,17 +1,35 @@
-﻿@{
+﻿@using Ninject;
+@using PiggiesWorld.PL.Web.Models;  
+@using PiggiesWorld.BLL.Contracts;
+
+@{
     Layout = "/Layouts/_externalLayout.cshtml";
 
     int videoCount = Request["videoCount"] == null ? 20 : int.Parse(Request["videoCount"]);
 
     Page.VideoCount = videoCount;
+
+    var allCount = -1;
+    try
+    {
+        allCount = DependencesResolver.Resolver.Get<IVideoManager>().GetCount(!(User.IsInRole("admin") || User.IsInRole("moderator")));
+    }
+    catch (PiggiesWorld.Common.Exceptions.DALException e)
+    {
+        Logger.Log.Error(e.ToString());
+        Response.Redirect("~/Pages/ErrorPage.html");
+    }
 }
 
 <div class="container">
     @RenderPage("~/PartialPages/_video.cshtml")
     <div class="center-block text-center">
         <div>
-            <a class="btn-secondary" href="~/Pages/VideoPages/Video.cshtml?videoCount=@(videoCount + 20)">Показать еще</a>
-            <div class="w-100"></div>
+            @if (allCount > videoCount)
+            {
+                <a class="btn-secondary" href="~/Pages/VideoPages/Video.cshtml?videoCount=@(videoCount + 20)">Показать еще</a>
+                <div class="w-100"></div>
+            }
             @if (User.Identity.IsAuthenticated)
             {
                 <button type="button" class="btn-secondary" data-toggle="modal" data-target="#addVideoModal">Предложить видео</button>

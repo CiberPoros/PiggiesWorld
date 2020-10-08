@@ -3,7 +3,7 @@ using PiggiesWorld.Common.Entities;
 
 namespace PiggiesWorld.BLL.Contracts
 {
-    public interface IVideoManager : ISubmitEntityManager
+    public interface IVideoManager : ISubmitEntityManager, ICountOfElementsManager
     {
         IEnumerable<(Video video, string uploaderName)> GetVideoWithUploaders(int count, bool submitedOnly);
         void AddVideo(Video video);
