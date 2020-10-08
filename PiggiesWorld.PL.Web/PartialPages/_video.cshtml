@@ -23,7 +23,7 @@
                 @if (User.IsInRole("admin") || User.IsInRole("moderator"))
                 {
                     <div class="d-flex justify-content-around">
-                        <form action="~/Pages/DeleteVideo.cshtml?videoID=@(item.video.ID)" method="post">
+                        <form action="~/Pages/VideoPages/DeleteVideoTemp.cshtml?videoID=@(item.video.ID)" method="post">
                             <input type="submit" class="btn btn-danger m-md-2" name="delete" value="delete" />
                         </form>
                         @if (!item.video.IsSubmited)

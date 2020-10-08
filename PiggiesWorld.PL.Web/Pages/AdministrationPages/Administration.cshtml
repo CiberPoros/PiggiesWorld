@@ -27,7 +27,7 @@
                 <h3 class="card-title">@user.LoginName</h3>
                 <p class="card-text">День рождния: @(user.BirthDay)</p>
                 <p class="card-text">Возраст: @(user.Age)</p>
-                <form action="~/Pages/ChangeUserRoles.cshtml?id=@user.ID" method="post">
+                <form action="~/Pages/AdministrationPages/ChangeUserRoles.cshtml?id=@user.ID" method="post">
                     <div>
                         @foreach (var role in roles)
                         {

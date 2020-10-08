@@ -7,7 +7,7 @@
 
     if (Request["story_id"] is null)
     {
-        Response.Redirect("~/Pages/PigStories.cshtml");
+        Response.Redirect("~/Pages/StoriesPages/PigStories.cshtml");
     }
 
     int storyID = int.Parse(Request["story_id"]);

@@ -8,7 +8,7 @@
 
     if (!User.IsInRole("admin") && !User.IsInRole("moderator"))
     {
-        Response.Redirect("~/Pages/Video.cshtml");
+        Response.Redirect("~/Pages/VideoPages/Video.cshtml");
     }
 
     if (IsPost)
@@ -22,5 +22,5 @@
         videoManager.AddVideo(new Video { Url = url, Description = description, UserID = usersManager.GetUserByLogin(User.Identity.Name).ID, UploadDate = DateTime.Now});
     }
 
-    Response.Redirect("~/Pages/Video.cshtml");
+    Response.Redirect("~/Pages/VideoPages/Video.cshtml");
 }

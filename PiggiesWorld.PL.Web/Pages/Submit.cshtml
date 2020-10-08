@@ -26,13 +26,13 @@
         {
             submitEntityManager = DependencesResolver.Resolver.Get<IVideoManager>();
             id = int.Parse(Request["videoID"]);
-            redirectString = "~/Pages/Video.cshtml";
+            redirectString = "~/Pages/VideoPages/Video.cshtml";
         }
         else if (!string.IsNullOrEmpty(Request["storyID"]))
         {
             submitEntityManager = DependencesResolver.Resolver.Get<IStoriesManager>();
             id = int.Parse(Request["storyID"]);
-            redirectString = "~/Pages/PigStories.cshtml";
+            redirectString = "~/Pages/StoriesPages/PigStories.cshtml";
         }
         else
         {

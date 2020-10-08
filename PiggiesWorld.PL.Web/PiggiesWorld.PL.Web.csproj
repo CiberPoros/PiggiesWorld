@@ -145,26 +145,26 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
-    <Content Include="Pages\LogOut.cshtml" />
+    <Content Include="Pages\AuthPages\LogOutTemp.cshtml" />
     <Content Include="Pages\PhotoPages\DeletePhotoTemp.cshtml" />
     <Content Include="Pages\PhotoPages\UploadPhotoTemp.cshtml" />
-    <Content Include="Pages\PigStories.cshtml" />
-    <Content Include="Pages\UploadStory.cshtml" />
+    <Content Include="Pages\StoriesPages\PigStories.cshtml" />
+    <Content Include="Pages\StoriesPages\UploadStoryTemp.cshtml" />
     <Content Include="PartialPages\_story.cshtml" />
-    <Content Include="Pages\FullPigStory.cshtml" />
-    <Content Include="Pages\DeleteStory.cshtml" />
+    <Content Include="Pages\StoriesPages\FullPigStory.cshtml" />
+    <Content Include="Pages\StoriesPages\DeleteStoryTemp.cshtml" />
     <Content Include="fonts\FontAwesome.otf" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
-    <Content Include="Pages\Video.cshtml" />
+    <Content Include="Pages\VideoPages\Video.cshtml" />
     <Content Include="PartialPages\_video.cshtml" />
-    <Content Include="Pages\UploadVideo.cshtml" />
+    <Content Include="Pages\VideoPages\UploadVideoTemp.cshtml" />
     <Content Include="Pages\Submit.cshtml" />
-    <Content Include="Pages\DeleteVideo.cshtml" />
-    <Content Include="Pages\Administration.cshtml" />
-    <Content Include="Pages\ChangeUserRoles.cshtml" />
+    <Content Include="Pages\VideoPages\DeleteVideoTemp.cshtml" />
+    <Content Include="Pages\AdministrationPages\Administration.cshtml" />
+    <Content Include="Pages\AdministrationPages\ChangeUserRoles.cshtml" />
     <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
     <Content Include="Scripts\jquery-3.0.0.js" />
     <Content Include="Scripts\jquery-3.0.0.min.js" />
@@ -258,8 +258,8 @@
   <ItemGroup>
     <Content Include="index.cshtml" />
     <Content Include="Layouts\_externalLayout.cshtml" />
-    <Content Include="Pages\Registration.cshtml" />
-    <Content Include="Pages\LogIn.cshtml" />
+    <Content Include="Pages\AuthPages\Registration.cshtml" />
+    <Content Include="Pages\AuthPages\LogIn.cshtml" />
     <Content Include="Pages\PhotoPages\Photo.cshtml" />
     <None Include="packages.config" />
     <Content Include="PartialPages\_header.cshtml" />
@@ -306,10 +306,7 @@
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pages\StoriesPages\" />
-    <Folder Include="Pages\VideoPages\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -22,20 +22,20 @@
             else
             {
                 // TODO: user already exists
-                Response.Redirect("~/Pages/Registration.cshtml");
+                Response.Redirect("~/Pages/AuthPages/Registration.cshtml");
             }
         }
         else
         {
             // TODO: incorrect data format
-            Response.Redirect("~/Pages/Registration.cshtml");
+            Response.Redirect("~/Pages/AuthPages/Registration.cshtml");
         }
     }
 }
 
 <link href="~/Content/auth.css" rel="stylesheet" />
 <div>
-    <form class="box" action="~/Pages/Registration.cshtml" onsubmit="return validateForm()" method="post">
+    <form class="box" action="~/Pages/AuthPages/Registration.cshtml" onsubmit="return validateForm()" method="post">
         <h1>Регистрация</h1>
         <input id="login" type="text" placeholder="Имя пользователя" maxlength="20" name="login" required>
         <input id="pass" type="password" placeholder="Пароль" maxlength="20" name="password" required>

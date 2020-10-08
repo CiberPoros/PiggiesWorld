@@ -6,12 +6,13 @@
     <ul class="nav navbar-nav navbar-right">
         @if (!User.Identity.IsAuthenticated)
         {
-            <li class="nav-item"><a class="nav-link text-dark" href="~/Pages/LogIn.cshtml">Войти</a></li>
-            <li class="nav-item"><a class="nav-link text-dark" href="~/Pages/Registration.cshtml">Регистрация</a></li>
+            <li class="nav-item"><a class="nav-link text-dark" href="~/Pages/AuthPages/LogIn.cshtml">Войти</a></li>
+            <li class="nav-item"><a class="nav-link text-dark" href="~/Pages/AuthPages/Registration.cshtml">Регистрация</a></li>
         }
         else
         {
-            <li class="nav-item"><a class="nav-link text-dark" href="~/Pages/LogOut.cshtml">Выйти</a></li>
+            <li class="nav-item"><span class="navbar-text">@User.Identity.Name</span></li>
+            <li class="nav-item"><a class="nav-link text-dark" href="~/Pages/AuthPages/LogOutTemp.cshtml">Выйти</a></li>
         }
     </ul>
 </div>

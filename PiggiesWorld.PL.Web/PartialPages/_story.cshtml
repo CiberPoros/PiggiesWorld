@@ -15,14 +15,14 @@
         {
             <div class="card m-md-3 p-md-2" style="width: 250px">
                 <h3 class="card-title">@item.story.Title</h3>
-                <a href="~/Pages/FullPigStory.cshtml?story_id=@(item.story.ID)"><img class="card-img-top img-thumbnail" src="~/Images/Photo/@(item.story.PreviewPhotoName)" alt="@(item.story.Description)" width="300" /></a>
+                <a href="~/Pages/StoriesPages/FullPigStory.cshtml?story_id=@(item.story.ID)"><img class="card-img-top img-thumbnail" src="~/Images/Photo/@(item.story.PreviewPhotoName)" alt="@(item.story.Description)" width="300" /></a>
                 <h6 class="card-title">Автор: @(item.uploaderName)</h6>
                 <p class="card-text">@item.story.Description</p>
 
                 @if (User.IsInRole("admin") || User.IsInRole("moderator"))
                 {
                     <div class="d-flex justify-content-around">
-                        <form action="~/Pages/DeleteStory.cshtml?storyID=@(item.story.ID)" method="post">
+                        <form action="~/Pages/StoriesPages/DeleteStoryTemp.cshtml?storyID=@(item.story.ID)" method="post">
                             <input type="submit" class="btn btn-danger m-md-2" name="delete" value="delete" />
                         </form>
                         @if (!item.story.IsSubmited)

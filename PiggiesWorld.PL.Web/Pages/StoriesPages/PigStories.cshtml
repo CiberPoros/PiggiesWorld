@@ -13,7 +13,7 @@
     </div>
 
     <div>
-        <a class="btn-secondary" href="~/Pages/PigStories.cshtml?storyCount=@(storyCount + 20)">Показать еще</a>
+        <a class="btn-secondary" href="~/Pages/StoriesPages/PigStories.cshtml?storyCount=@(storyCount + 20)">Показать еще</a>
         <div class="w-100"></div>
         @if (User.Identity.IsAuthenticated)
         {
@@ -26,7 +26,7 @@
                 <div class="modal-header">
                     <h4 class="modal-title" id="myModalLabel">Заполните поля</h4>
                 </div>
-                <form action="~/Pages/UploadStory.cshtml" enctype="multipart/form-data" method="post">
+                <form action="~/Pages/StoriesPages/UploadStoryTemp.cshtml" enctype="multipart/form-data" method="post">
                     <div class="modal-body">
                         <input type="text" name="story_title" placeholder="введите заголовок*" maxlength="30" size="48" value="" required />
                         <div class="mb-md-1">

@@ -5,12 +5,12 @@
 <div>
     <ul class="navbar-nav mr-auto">
         <li class="nav-item"><a class="nav-link" href="~/Pages/PhotoPages/Photo.cshtml">Фото</a></li>
-        <li class="nav-item"><a class="nav-link" href="~/Pages/Video.cshtml">Видео</a></li>
-        <li class="nav-item"><a class="nav-link" href="~/Pages/PigStories.cshtml">Пиго-истории</a></li>
+        <li class="nav-item"><a class="nav-link" href="~/Pages/VideoPages/Video.cshtml">Видео</a></li>
+        <li class="nav-item"><a class="nav-link" href="~/Pages/StoriesPages/PigStories.cshtml">Пиго-истории</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Ищу хозяина</a></li>
         @if (User.IsInRole("admin"))
         {
-            <li class="nav-item"><a class="nav-link" href="~/Pages/Administration.cshtml">Администрирование</a></li>
+            <li class="nav-item"><a class="nav-link" href="~/Pages/AdministrationPages/Administration.cshtml">Администрирование</a></li>
         }
     </ul>
 </div>

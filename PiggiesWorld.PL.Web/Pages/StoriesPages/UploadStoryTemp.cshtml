@@ -8,7 +8,7 @@
 
     if (!User.IsInRole("admin") && !User.IsInRole("moderator"))
     {
-        Response.Redirect("~/Pages/PigStories.cshtml");
+        Response.Redirect("~/Pages/StoriesPages/PigStories.cshtml");
     }
 
     if (IsPost)
@@ -43,6 +43,6 @@
         string Normalize(string str) => str.Trim() == string.Empty ? null : str.Trim();
     }
 
-    Response.Redirect("~/Pages/PigStories.cshtml");
+    Response.Redirect("~/Pages/StoriesPages/PigStories.cshtml");
 }
 
